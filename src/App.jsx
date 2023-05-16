@@ -1,38 +1,29 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import imagenFondo from '/img/Background1.png';
 
 function App() {
   const [count, setCount] = useState(0)
 
   return (
     <>
-     
-      <div className='w-full h-screen flex flex-col items-center justify-center bg-neutral-800 text-center'>
-        <div className='flex space-x-9 mb-8'>
-        <a className="" href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo h-14" alt="Vite logo" />
-        </a>
-        <a className="" href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react h-14" alt="React logo" />
-        </a>
-        </div>
 
-        <h1 className='text-gray-300 font-bold text-3xl'>Vite + React</h1>
-      <div className="text-gray-300 mt-14 card ">
-        <button className="bg-black  p-1.5 px-4 rounded-lg mb-2 " onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
+      <div className="w-screen h-screen bg-cover bg-center relative" alt='fondo' style={{ backgroundImage: `url(${imagenFondo})` }}>
+        <nav className='flex justify-between'>
+            <img className="mt-5 ml-5 w-14 h-14" src='/img/Menu.png' alt='menu'></img>
+            <img className="mt-6 mr-9 w-10 h-12" src='/img/logo.png' alt='logo'></img>
+        </nav>
+        <main className="text-center text-white  flex flex-col justify-center items-center absolute inset-y-1/2 inset-x-5">
+          <h1 className='font-sans pb-6 text-5xl leading-10 font-bold'>For the love of manga</h1>
+          <h5 className='font-sans text-xl font-normal pb-6 leading-5'>Explore our varieties</h5>
+          <button className='bg-white text-orange-500 text-xl cursor-pointer font-medium py-5 lg:py-4 w-11/12 sm:w-4/5 md:w-2/5 lg:w-1/5  rounded-md'>Let’s go!</button>
+        </main>
+        <footer>
+
+        </footer>
+
+
       </div>
-      <p className="read-the-docs text-gray-500 mt-12 ">
-        Click on the Vite and React logos to learn more
-      </p>
-      <img className='rounded-full h-24 mt-5 object-cover  shadow-lg shadow-white/50 hover:shadow-green-200/50' src="https://mindhubweb.com/android-chrome-192x192.png" />
-      </div>
-      
+
     </>
   )
 }
