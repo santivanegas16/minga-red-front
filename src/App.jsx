@@ -1,7 +1,5 @@
 import { useState } from 'react'
-import imagenFondo from '/img/Background1.png';
-import Navbar from './components/Navbar';
-import Footer from './components/Footer';
+import Main from './layouts/Main';
 import Index from './pages/Index';
 
 
@@ -17,11 +15,9 @@ function App() {
 
   return (
     <>
-      <div className="w-full h-screen lg:h-[646px] lg:-top-0.5 bg-cover bg-center" alt='fondo' style={{ backgroundImage: `url(${imagenFondo})` }}>
-      </div>
-      <Navbar />
-      <Index data={data} />    
-      <Footer />
+      <Main>
+        <Index data={data} />
+      </Main>
     </>
   )
 }
