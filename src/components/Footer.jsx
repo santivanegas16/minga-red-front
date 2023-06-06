@@ -4,6 +4,7 @@ import Facebook from '/img/Facebook.svg';
 import Twitter from '/img/Twitter.svg';
 import Vimeo from '/img/Vimeo.svg';
 import Youtube from '/img/Youtube.svg';
+import Union from '/img/Union.svg'
 
 
 export default function Footer() {
@@ -24,7 +25,7 @@ export default function Footer() {
           <a href='#'><img className="px-5" src={Vimeo} alt='logo' /></a>
           <a href='#'><img className="px-5 lg:pl-5 lg:pr-0" src={Youtube} alt='logo' /></a>
         </div>
-        <button className='mb-10 lg:mb-5 flex justify-center items-center bg-orange-500 text-white text-base cursor-pointer font-poppins font-normal leading-4 h-[43px] w-[221px] rounded-md'>Donate <img className="ml-5 mt-1" src='/img/Union.svg' alt='union' /></button>
+        <button className='mb-10 lg:mb-5 flex justify-center items-center bg-orange-500 text-white text-base cursor-pointer font-poppins font-normal leading-4 h-[43px] w-[221px] rounded-md'>Donate <img className="ml-5 mt-1" src={Union} alt='union' /></button>
       </div>
     </div>
     <hr className="mb-24 w-4/5 mx-auto hidden lg:block text-[#222222] border-[#2B3D51] opacity-30"></hr>
