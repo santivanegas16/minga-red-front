@@ -1,8 +1,9 @@
-import prevIcon from '/img/prev.png';
-import nextIcon from '/img/next.png';
+import prevIcon from '/img/prevIcon.svg';
+import nextIcon from '/img/nextIcon.svg';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import apiUrl from '../apiUrl';
+
 
 export default function Carousel() {
     let [categories, setCateogries] = useState([])
@@ -27,13 +28,13 @@ export default function Carousel() {
         // console.log(counter)
     }
     return (
-        <div className='h-[265px] bg-gradient-to-r from-[#FF5722] to-[#F97316] rounded-md flex items-center relative'>
+        <div className='h-[265px] rounded-md flex items-center relative' style={{backgroundColor: categories[counter]?.hover}}>
             <img onClick={prev} className="absolute left-8 cursor-pointer" src={prevIcon} alt='prev'></img>
             <img className="absolute w-[263px] h-[291px] self-end left-16" src={categories[counter]?.character_photo} alt='character'></img>
             <img className="absolute w-[179px] h-[284px] left-[37%] bottom-[22px] xl:left-[379px] 2xl:right-[57%] 2xl:left-auto" src={categories[counter]?.cover_photo} alt='cover'></img>
             <div className='flex flex-col w-[26%] text-white absolute left-[63%] xl:w-[27%] xl:left-[704px] 2xl:w-[356px] 2xl:right-[18%] 2xl:left-auto'>
-                <h4 className='font-roboto text-2xl font-medium mb-2.5'>{categories[counter]?.name.toUpperCase()}</h4>
-                <p className='font-roboto text-sm font-normal leading-4'>{categories[counter]?.description}</p>
+                <h4 className='font-roboto text-2xl font-medium mb-2.5' style={{color: categories[counter]?.color}}>{categories[counter]?.name.toUpperCase()}</h4>
+                <p className='font-roboto text-sm font-normal leading-4' style={{color: categories[counter]?.color}}>{categories[counter]?.description}</p>
             </div>
             <img onClick={next} className="absolute right-8 cursor-pointer" src={nextIcon} alt='next'></img>
         </div>
