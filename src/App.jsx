@@ -1,16 +1,11 @@
-import { useState } from 'react'
-import Main from './layouts/Main';
-import Index from './pages/Index';
+import { RouterProvider } from 'react-router-dom';
+import router from './pages/router'
 
 
 function App() {
 
   return (
-    <>
-      <Main>
-        <Index />
-      </Main>
-    </>
+    <RouterProvider router={router} />
   )
 }
 
