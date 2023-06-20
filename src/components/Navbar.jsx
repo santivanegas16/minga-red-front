@@ -6,11 +6,11 @@ import { useState } from 'react';
 
 export default function Navbar() {
     let options = [
-        { title: "Home" },
-        { title: "Comics" },
-        { title: "My Comics" },
-        { title: "Favorites" },
-        { title: "Logout" }
+        {to:'/', title: "Home" },
+        {to:'/', title: "Comics" },
+        {to:'/', title: "My Comics" },
+        {to:'/', title: "Favorites" },
+        {to:'/', title: "Logout" }
     ]
     const [show, setShow] = useState(false)
     return (
