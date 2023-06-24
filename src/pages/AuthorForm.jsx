@@ -32,7 +32,7 @@ export default function AuthorForm() {
             <div className="w-full lg:w-1/2 min-h-screen flex flex-col items-center justify-center pt-[90px] ">
                 <h1 className='font-poppins leading-10 font-normal text-4xl mb-[30px]'>New Author</h1>
                 <img className='mb-[40px]' src={PerfilDos} alt='Perfil' />
-                <form className='flex flex-col items-center w-[280px] md:w-[300px] lg:w-[320px] text-base gap-[12px]'>
+                <form className='flex flex-col items-center w-[280px] md:w-[350px] lg:w-[420px] text-base gap-[12px]'>
                     <input ref={name} className='w-full border border-transparent border-b-[#424242] bg-[#EBEBEB] px-4 py-2' type="text" placeholder="Name" id="name" required />
                     <input ref={last_name} className='w-full border border-transparent border-b-[#424242] bg-[#EBEBEB] px-4 py-2' type="text" placeholder="Last name" id="last_name" />
                     <input ref={city_country} className='w-full border border-transparent border-b-[#424242] bg-[#EBEBEB] px-4 py-2' type="text" placeholder="City, Country" id="city_country" required />
@@ -41,7 +41,7 @@ export default function AuthorForm() {
                     <input onClick={authorForm} className='bg-gradient-to-r from-[#FF5722] to-[#F97316] text-white text-xl lg:text-2xl cursor-pointer font-roboto font-medium py-[15.5px] lg:py-[11.5px] w-[280px] rounded-full text-center mt-[20px]' type="button" value="Send" />
                 </form>
             </div>
-            <img className='hidden lg:block h-screen w-1/2 object-cover' src={register} alt='Perfil' />
+            <img className='hidden lg:block min-h-[640px] max-h-screen w-1/2 object-cover' src={register} alt='Perfil' />
         </main>
 
     )
