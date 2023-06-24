@@ -6,7 +6,7 @@ export default function CiaForm() {
                             flex justify-center">
 
                 <div className='h-full flex flex-col
-                                w-[280px] md:w-[360px]'>
+                                w-[280px] md:w-[350px] lg:w-[420px]'>
 
                     <div className="w-full h-full mt-[10%] mb-[20%] flex flex-col items-center justify-center gap-9">
 
