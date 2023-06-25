@@ -1,6 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import Index from './Index'
 import SignIn from './SignIn'
+import CiaForm from './CiaForm'
 import Main from '../layouts/Main'
 import AuthorForm from './AuthorForm'
 
@@ -14,9 +15,8 @@ const router = createBrowserRouter([
         { path: '/index', element: <Index/>},
         { path: '/home', element: <Index/>},
         { path: '/signin', element: <SignIn/>},
+        { path: '/cia-form', element: <CiaForm/> }
         { path: '/author-form', element: <AuthorForm/>},
-
-
     ]}
 ])
 
