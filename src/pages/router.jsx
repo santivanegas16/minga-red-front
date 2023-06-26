@@ -4,6 +4,7 @@ import SignIn from './SignIn'
 import CiaForm from './CiaForm'
 import Main from '../layouts/Main'
 import AuthorForm from './AuthorForm'
+import MangaForm from './MangaForm';
 
 const router = createBrowserRouter([
     //necesita que pasemos un array de objetos
@@ -17,6 +18,7 @@ const router = createBrowserRouter([
         { path: '/signin', element: <SignIn/>},
         { path: '/cia-form', element: <CiaForm/> },
         { path: '/author-form', element: <AuthorForm/>},
+        { path: '/manga-form', element: <MangaForm/>},
     ]}
 ])
 
