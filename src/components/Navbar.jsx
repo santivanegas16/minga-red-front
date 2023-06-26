@@ -11,7 +11,8 @@ export default function Navbar() {
         {to:'/', title: "My Comics" },
         {to:'/', title: "Favorites" },
         {to:'/', title: "Logout" },
-        {to:'/manga-form', title: "MangaForm" }
+        {to:'/author-form', title: "New Author" },
+        {to:'/manga-form', title: "New Manga" },
     ]
     const [show, setShow] = useState(false)
     return (
