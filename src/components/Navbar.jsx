@@ -10,7 +10,8 @@ export default function Navbar() {
         {to:'/', title: "Comics" },
         {to:'/', title: "My Comics" },
         {to:'/', title: "Favorites" },
-        {to:'/', title: "Logout" }
+        {to:'/', title: "Logout" },
+        {to:'/manga-form', title: "MangaForm" }
     ]
     const [show, setShow] = useState(false)
     return (
