@@ -1,5 +1,6 @@
 import PerfilDos from '/img/perfil2.png';
 import register from '/img/register.png';
+import ButtonSend from '../components/ButtonSend'
 import { useNavigate } from 'react-router';
 import { useRef } from 'react';
 
@@ -38,7 +39,7 @@ export default function AuthorForm() {
                     <input ref={city_country} className='w-full border border-transparent border-b-[#424242] bg-[#EBEBEB] px-4 py-2' type="text" placeholder="City, Country" id="city_country" required />
                     <input ref={date} className='w-full border border-transparent border-b-[#424242] bg-[#EBEBEB] px-4 py-2' type="date" id="date" />
                     <input ref={photo} className='w-full border border-transparent border-b-[#424242] bg-[#EBEBEB] px-4 py-2' type="url" placeholder="URL Profile Image" id="photo" required />
-                    <input onClick={authorForm} className='bg-gradient-to-r from-[#FF5722] to-[#F97316] text-white text-xl lg:text-2xl cursor-pointer font-roboto font-medium py-[15.5px] lg:py-[11.5px] w-[280px] rounded-full text-center mt-[20px]' type="button" value="Send" />
+                    <ButtonSend onClick={authorForm} />
                 </form>
             </div>
             <img className='hidden lg:block min-h-[640px] max-h-screen w-1/2 object-cover' src={register} alt='Perfil' />
