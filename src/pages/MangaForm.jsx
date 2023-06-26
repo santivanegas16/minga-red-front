@@ -21,7 +21,7 @@ export default function MangaForm() {
       category_id: category_id.current.value,
       cover_photo: cover_photo.current.value,
     };
-    console.log("hola");
+    console.log(data);
 
     navigate("/");
   };
