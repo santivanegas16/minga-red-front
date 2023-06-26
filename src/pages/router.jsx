@@ -15,7 +15,7 @@ const router = createBrowserRouter([
         { path: '/index', element: <Index/>},
         { path: '/home', element: <Index/>},
         { path: '/signin', element: <SignIn/>},
-        { path: '/cia-form', element: <CiaForm/> }
+        { path: '/cia-form', element: <CiaForm/> },
         { path: '/author-form', element: <AuthorForm/>},
     ]}
 ])
