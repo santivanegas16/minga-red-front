@@ -22,6 +22,7 @@ export default function Login() {
                 alert("user signed in!");
                 localStorage.setItem('token', response.response.token);
                 localStorage.setItem('user', JSON.stringify(response.response.user));
+                setTimeout(() => navigate('/'), 1000);
             } else {
                 alert("error!");
             }
@@ -29,8 +30,6 @@ export default function Login() {
             console.log(error);
             alert("error!");
         }
-
-        // setTimeout(() => navigate('/'), 1000);
     }
 
     const email = useRef();
