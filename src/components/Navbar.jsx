@@ -3,14 +3,27 @@ import Menu from '/img/Menu.svg';
 import LogoMobile from '/img/LogoMobile.png';
 import logo from '/img/logo.png';
 import { useState } from 'react';
+import axios from 'axios';
+import apiUrl from '../apiUrl.js';
+import header from '../header.js';
 
 export default function Navbar() {
+
+    const signout = async () => {
+        try {
+            await axios.post(apiUrl + 'auth/signout', null, header())
+            localStorage.removeItem('token');
+            localStorage.removeItem('user');
+        } catch (error) {
+            console.log(error);
+        }
+    }
     let options = [
         { to: '/', title: "Home" },
         { to: '/', title: "Comics" },
         { to: '/', title: "My Comics" },
         { to: '/', title: "Favorites" },
-        { to: '/', title: "Logout" },
+        { to: '/', title: "Sing Out", onClick: signout },
         { to: '/author-form', title: "New Author" },
         { to: '/manga-form', title: "New Manga" },
     ]

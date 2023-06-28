@@ -1,6 +1,8 @@
 import { Link as Anchor } from 'react-router-dom';
 import { useNavigate } from 'react-router';
 import { useRef } from 'react';
+import axios from 'axios';
+import apiUrl from '../apiUrl.js';
 import bg_login from '../../public/img/Bg_form.png';
 import Logo_register from '../../public/img/Logo_register.svg';
 import google from '../../public/img/google.png';
@@ -8,13 +10,27 @@ import google from '../../public/img/google.png';
 export default function Login() {
 
     const navigate = useNavigate();
-    const loginForm = () => {
+    const loginForm = async () => {
         const data = {
             email: email.current.value,
             password: password.current.value
         }
-        console.log(data);
-        setTimeout(() => navigate('/'), 1000);
+
+        try {
+            const response = await axios.post(apiUrl + 'auth/signin', data).then(res => res.data);
+            if (response.success) {
+                alert("user signed in!");
+                localStorage.setItem('token', response.response.token);
+                localStorage.setItem('user', JSON.stringify(response.response.user));
+            } else {
+                alert("error!");
+            }
+        } catch (error) {
+            console.log(error);
+            alert("error!");
+        }
+
+        // setTimeout(() => navigate('/'), 1000);
     }
 
     const email = useRef();
