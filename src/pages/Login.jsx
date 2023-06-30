@@ -1,5 +1,4 @@
 import { Link as Anchor } from 'react-router-dom';
-import { useNavigate } from 'react-router';
 import { useRef } from 'react';
 import axios from 'axios';
 import apiUrl from '../apiUrl.js';
@@ -9,7 +8,6 @@ import google from '../../public/img/google.png';
 
 export default function Login() {
 
-    const navigate = useNavigate();
     const loginForm = async () => {
         const data = {
             email: email.current.value,
@@ -22,7 +20,7 @@ export default function Login() {
                 alert("user signed in!");
                 localStorage.setItem('token', response.response.token);
                 localStorage.setItem('user', JSON.stringify(response.response.user));
-                setTimeout(() => navigate('/'), 1000);
+                setTimeout(() => window.location.replace('/'), 1000);
             } else {
                 alert("error!");
             }
