@@ -3,6 +3,9 @@ import Bg_form from '/img/Bg_form.png';
 import ButtonSend from '../components/ButtonSend'
 import { useNavigate } from 'react-router';
 import { useRef } from 'react';
+import apiUrl from "../apiUrl"
+import axios from "axios"
+import Swal from 'sweetalert2';
 
 export default function AuthorForm() {
 
@@ -17,9 +20,29 @@ export default function AuthorForm() {
             date: date.current.value,
             photo: photo.current.value
         }
+        let headers = { headers: { 'Authorization': `Bearer ${localStorage.getItem("token")}` } }
         console.log(data)
+        axios.post(apiUrl + "/authors", data, headers).then(() => {
+            Swal.fire({ "icon": "success" })
+            navigate('/')
+        }
+        ).catch(error => {
+            if (error.response.data?.messages) {
+                Swal.fire({
+                    "icon": "error",
+                    "html": error.response.data.messages.map(each => `<p>${each}</p>`).join("")
+                })
+            } else {
+                Swal.fire({
+                    "icon": "error",
+                    "html": `<p>${error.response.data}</p>`
+                })
+            }
+            // console.log(error)
+        }
+        )
 
-        setTimeout(() => navigate('/'), 1000)
+
     }
     const name = useRef()
     const last_name = useRef()

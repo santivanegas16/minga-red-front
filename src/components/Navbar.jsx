@@ -14,18 +14,19 @@ export default function Navbar() {
             await axios.post(apiUrl + 'auth/signout', null, header())
             localStorage.removeItem('token');
             localStorage.removeItem('user');
+            window.location.replace('/')
         } catch (error) {
             console.log(error);
         }
     }
     let options = [
-        { to: '/', title: "Home" },
-        { to: '/', title: "Comics" },
-        { to: '/', title: "My Comics" },
-        { to: '/', title: "Favorites" },
-        { to: '/', title: "Sing Out", onClick: signout },
-        { to: '/author-form', title: "New Author" },
-        { to: '/manga-form', title: "New Manga" },
+        { to: '/', title: "Home", role: 0 },
+        { to: '/', title: "Comics", role: 0 },
+        { to: '/register', title: "Register" , online: false},
+        { to: '/login', title: "Login", online: false },
+        { to: '/', title: "Sing Out", onClick: signout, online: true },
+        { to: '/author-form', title: "New Author", online: true, role: 0 },
+        { to: '/manga-form', title: "New Manga", online: true, role: 1 },
     ]
     const [show, setShow] = useState(false)
     return (
