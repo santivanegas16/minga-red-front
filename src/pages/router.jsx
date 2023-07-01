@@ -1,10 +1,12 @@
 import { createBrowserRouter } from "react-router-dom";
 import Index from './Index'
-import SignIn from './SignIn'
+import Register from './Register'
+import NotAllowed from "./NotAllowed";
 import CiaForm from './CiaForm'
 import Main from '../layouts/Main'
 import AuthorForm from './AuthorForm'
 import MangaForm from './MangaForm';
+import Login from './Login';
 
 const router = createBrowserRouter([
     //necesita que pasemos un array de objetos
@@ -15,7 +17,9 @@ const router = createBrowserRouter([
         { path: '/', element: <Index/>},
         { path: '/index', element: <Index/>},
         { path: '/home', element: <Index/>},
-        { path: '/signin', element: <SignIn/>},
+        { path: '/register', element: <Register /> },
+        { path: '/login', element: <Login /> },
+        { path: '/not-allowed', element: <NotAllowed/>},
         { path: '/cia-form', element: <CiaForm/> },
         { path: '/author-form', element: <AuthorForm/>},
         { path: '/manga-form', element: <MangaForm/>},
