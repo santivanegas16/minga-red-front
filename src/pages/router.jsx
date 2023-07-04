@@ -1,4 +1,4 @@
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter, redirect } from "react-router-dom";
 import Index from './Index'
 import Register from './Register'
 import NotAllowed from "./NotAllowed";
@@ -13,16 +13,35 @@ const router = createBrowserRouter([
     //cada objeto tendra la propiedad PATH con la ruta y ELEMENT con el elemento que renderiza ese path
     {path: '/', // con una ruta
      element: <Main />, // renderizo un componente de tipo layaout
-     children: [ // cuyos hijes van a ser todas las interfaces que tenga la app
+     children: [ // cuyos hijos van a ser todas las interfaces que tenga la app
         { path: '/', element: <Index/>},
         { path: '/index', element: <Index/>},
         { path: '/home', element: <Index/>},
-        { path: '/register', element: <Register /> },
-        { path: '/login', element: <Login /> },
+        { path: '/register', element: <Register />, loader: async () =>{
+            let user = JSON.parse(localStorage.getItem("user"))
+            return (user) && redirect("/not-allowed")
+        }},
+        { path: '/login', element: <Login />, loader: async () =>{
+            let user = JSON.parse(localStorage.getItem("user"))
+            return (user) && redirect("/not-allowed")
+        } },
+        { path: '/cia-form', element: <CiaForm/>, loader: async () =>{
+            let user = JSON.parse(localStorage.getItem("user"))
+            return (user.role === 1 || user.role === 2 || user.role === 3) && redirect("/not-allowed")
+        } },
+        { path: '/author-form', element: <AuthorForm/>, loader: async () =>{
+            let user = JSON.parse(localStorage.getItem("user"))
+            return (user.role === 1 || user.role === 2 || user.role === 3) && redirect("/not-allowed")
+        }},
+        { path: '/manga-form', element: <MangaForm/>, loader: async () =>{
+            let user = JSON.parse(localStorage.getItem("user"))
+            return (user.role === 0 || user.role === 3) && redirect("/not-allowed")
+        }},
+        // { path: '/:manga_id/chapther-form', element: <ChapterForm/>, loader: async () =>{
+        //     let user = JSON.parse(localStorage.getItem("user"))
+        //     return (user.role === 0 || user.role === 3) && redirect("/not-allowed")
+        // }},
         { path: '/not-allowed', element: <NotAllowed/>},
-        { path: '/cia-form', element: <CiaForm/> },
-        { path: '/author-form', element: <AuthorForm/>},
-        { path: '/manga-form', element: <MangaForm/>},
     ]}
 ])
 
