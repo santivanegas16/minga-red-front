@@ -2,10 +2,11 @@ import Display from './Display';
 import Menu from '/img/Menu.svg';
 import LogoMobile from '/img/LogoMobile.png';
 import logo from '/img/logo.png';
-import { useState } from 'react';
+import { useState } from "react";
 import axios from 'axios';
 import apiUrl from '../apiUrl.js';
 import header from '../header.js';
+import { useEffect } from "react";
 
 export default function Navbar() {
 
@@ -19,15 +20,43 @@ export default function Navbar() {
             console.log(error);
         }
     }
-    let options = [
-        { to: '/', title: "Home", role: 0 },
-        { to: '/', title: "Comics", role: 0 },
-        { to: '/register', title: "Register" , online: false},
-        { to: '/login', title: "Login", online: false },
-        { to: '/', title: "Sing Out", onClick: signout, online: true },
-        { to: '/author-form', title: "New Author", online: true, role: 0 },
-        { to: '/manga-form', title: "New Manga", online: true, role: 1 },
-    ]
+
+    const [options, setOptions] = useState([]);
+
+    let user = JSON.parse(localStorage.getItem("user"));
+    useEffect(
+        () => {
+            if (user) {
+                if (user.role === 0) {
+                    setOptions([
+                        { to: '/', title: "Home" },
+                        { to: '/author-form', title: "New Author" },
+                        { to: '/cia-form', title: "New Company" },
+                        { to: '/', title: "Sign Out", onClick: signout },
+                    ]);
+                } else if (user.role === 1 || user.role === 2) {
+                    setOptions([
+                        { to: '/', title: "Home" },
+                        { to: '/manga-form', title: "New Manga" },
+                        //{ to: '/chapter-form', title: "New Chapter" }, // falta agregar
+                        { to: '/', title: "Sign Out", onClick: signout },
+                    ]);
+                } else if (user.role === 3) {
+                    setOptions([
+                        { to: '/', title: "Home" },
+                        { to: '/', title: "Sign Out", onClick: signout },
+                    ]);
+                }
+            }
+            else {
+                setOptions([
+                    { to: '/', title: "Home" },
+                    { to: '/register', title: "Register" },
+                    { to: '/login', title: "Login" },
+                ]);
+            }
+        }, [])
+
     const [show, setShow] = useState(false)
     return (
         <>
