@@ -38,12 +38,10 @@ export default function AuthorForm() {
                     "html": `<p>${error.response.data}</p>`
                 })
             }
-            // console.log(error)
         }
         )
-
-
     }
+
     const name = useRef()
     const last_name = useRef()
     const city_country = useRef()
@@ -51,7 +49,6 @@ export default function AuthorForm() {
     const photo = useRef()
 
     return (
-
         <main className="w-full min-h-screen flex justify-center bg-[#EBEBEB] pb-[30px]">
             <div className="w-full lg:w-1/2 min-h-screen flex flex-col items-center justify-center pt-[90px] ">
                 <h1 className='font-poppins leading-10 font-normal text-4xl mb-[30px]'>New Author</h1>
@@ -67,6 +64,5 @@ export default function AuthorForm() {
             </div>
             <img className='hidden lg:block min-h-[640px] max-h-screen w-1/2 object-cover' src={Bg_form} alt='Perfil' />
         </main>
-
     )
 }
