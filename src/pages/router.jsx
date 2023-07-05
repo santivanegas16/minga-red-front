@@ -7,6 +7,7 @@ import Main from '../layouts/Main'
 import AuthorForm from './AuthorForm'
 import MangaForm from './MangaForm';
 import Login from './Login';
+import ChapterForm from "./ChapterForm";
 
 const router = createBrowserRouter([
     //necesita que pasemos un array de objetos
@@ -37,10 +38,10 @@ const router = createBrowserRouter([
             let user = JSON.parse(localStorage.getItem("user"))
             return (user.role === 0 || user.role === 3) && redirect("/not-allowed")
         }},
-        // { path: '/:manga_id/chapther-form', element: <ChapterForm/>, loader: async () =>{
-        //     let user = JSON.parse(localStorage.getItem("user"))
-        //     return (user.role === 0 || user.role === 3) && redirect("/not-allowed")
-        // }},
+        { path: '/:manga_id/chapther-form', element: <ChapterForm/>, loader: async () =>{
+            let user = JSON.parse(localStorage.getItem("user"))
+            return (user.role === 0 || user.role === 3) && redirect("/not-allowed")
+        }},
         { path: '/not-allowed', element: <NotAllowed/>},
     ]}
 ])
