@@ -11,19 +11,22 @@ export default function MangaForm() {
   const navigate = useNavigate();
 
   const create = () => {
-    // console.log(title)
-    // console.log(title.current.value);
-    // console.log(description.current.value);
-
+ 
     let data = {
       title: title.current.value,
       description: description.current.value,
       category_id: category_id.current.value,
       cover_photo: cover_photo.current.value,
     };
+    let headers = { headers: { 'Authorization': `Bearer ${localStorage.getItem("token")}` } }
     console.log(data);
+    axios.post(apiUrl+"/mangas",data,headers).then(()=>{
+      navigate("/");
+    }).catch(error=>{
+      console.log(error);
+    })
 
-    navigate("/");
+  
   };
   const title = useRef();
   const description = useRef();
