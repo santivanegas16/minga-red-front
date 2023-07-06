@@ -28,18 +28,54 @@ const router = createBrowserRouter([
         } },
         { path: '/cia-form', element: <CiaForm/>, loader: async () =>{
             let user = JSON.parse(localStorage.getItem("user"))
+            if(user){
+                user = {
+                    role : user.role
+                }
+            }else{
+                user = {
+                    role : 1
+                }
+            }
             return (user.role === 1 || user.role === 2 || user.role === 3) && redirect("/not-allowed")
         } },
         { path: '/author-form', element: <AuthorForm/>, loader: async () =>{
             let user = JSON.parse(localStorage.getItem("user"))
+            if(user){
+                user = {
+                    role : user.role
+                }
+            }else{
+                user = {
+                    role : 1
+                }
+            }
             return (user.role === 1 || user.role === 2 || user.role === 3) && redirect("/not-allowed")
         }},
         { path: '/manga-form', element: <MangaForm/>, loader: async () =>{
             let user = JSON.parse(localStorage.getItem("user"))
+            if(user){
+                user = {
+                    role : user.role
+                }
+            }else{
+                user = {
+                    role : 0
+                }
+            }
             return (user.role === 0 || user.role === 3) && redirect("/not-allowed")
         }},
         { path: '/:manga_id/chapther-form', element: <ChapterForm/>, loader: async () =>{
             let user = JSON.parse(localStorage.getItem("user"))
+            if(user){
+                user = {
+                    role : user.role
+                }
+            }else{
+                user = {
+                    role : 0
+                }
+            }
             return (user.role === 0 || user.role === 3) && redirect("/not-allowed")
         }},
         { path: '/not-allowed', element: <NotAllowed/>},
