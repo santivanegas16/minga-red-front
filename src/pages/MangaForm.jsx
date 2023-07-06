@@ -5,28 +5,44 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import apiUrl from "../apiUrl";
 import ButtonSend from "../components/ButtonSend";
-
+import Swal from "sweetalert2";
+import header from "../header";
 
 export default function MangaForm() {
   const navigate = useNavigate();
 
   const create = () => {
- 
     let data = {
       title: title.current.value,
       description: description.current.value,
       category_id: category_id.current.value,
       cover_photo: cover_photo.current.value,
     };
-    let headers = { headers: { 'Authorization': `Bearer ${localStorage.getItem("token")}` } }
-    console.log(data);
-    axios.post(apiUrl+"/mangas",data,headers).then(()=>{
-      navigate("/");
-    }).catch(error=>{
-      console.log(error);
-    })
 
-  
+    axios
+      .post(apiUrl + "mangas", data, header())
+      .then(() => 
+        Swal.fire({
+          icon: "success",
+          text: "manga created",
+        }))
+       .then(()=>navigate("/"))
+      
+      .catch((error) => {
+        if (error.response.data?.messages) {
+          Swal.fire({
+            icon: "error",
+            html: error.response.data.messages
+              .map((each) => `<p>${each}</p>`)
+              .join(""),
+          });
+        } else {
+          Swal.fire({
+            icon: "error",
+            html: `<p>${error.response.data}</p>`,
+          });
+        }
+      });
   };
   const title = useRef();
   const description = useRef();
@@ -73,8 +89,8 @@ export default function MangaForm() {
             <option disabled value="0" className="text-[#9D9D9D]">
               Insert category
             </option>
-            {categories?.map((item,index) => (
-              <option key={index} className="text-black" value={item.name}>
+            {categories?.map((item, index) => (
+              <option key={index} className="text-black" value={item._id}>
                 {item.name}
               </option>
             ))}
