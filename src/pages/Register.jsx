@@ -5,22 +5,29 @@ import Icon_cam_register from '../../public/img/Icon_cam_register.svg';
 import Icon_pass_register from '../../public/img/Icon_pass_register.svg';
 import Forms from "../components/Form_login_register";
 import axios from 'axios';
+import apiUrl from '../apiUrl';
+import Swal from 'sweetalert2';
 
 export default function Register() {
 
     const navigate = useNavigate();
     const signun = async () => {
         const newUser = {
-            email: email.current.value,
-            photo: photo.current.value,
-            password: password.current.value,
+            email: email.current.value?.trim(),
+            photo: photo.current.value?.trim(),
+            password: password.current.value?.trim(),
         }
-        try {
-            console.log(newUser);
-            setTimeout(() => navigate('/', 1000));
-        } catch (error) {
-            console.log(error);
-        }
+        axios.post(apiUrl + "auth/register", newUser).then(() => {
+            Swal.fire({
+                icon: "success",
+                text: "Register Success, Sign in pleas!"
+            })
+        }).then(() => navigate("/login")).catch((error) => {
+            Swal.fire({
+                icon: "error",
+                html: error.response.data.messages.map(message => `<p>${message}</p>`).join("")
+            })
+        })
     }
 
     const email = useRef();
