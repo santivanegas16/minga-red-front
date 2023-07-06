@@ -38,7 +38,7 @@ export default function Navbar() {
                     setOptions([
                         { to: '/', title: "Home" },
                         { to: '/manga-form', title: "New Manga" },
-                        { to: '/chapter-form', title: "New Chapter" }, // falta agregar
+                        { to: '/:manga_id/chapther-form', title: "New Chapter" }, // falta agregar
                         { to: '/', title: "Sign Out", onClick: signout },
                     ]);
                 } else if (user.role === 3) {
