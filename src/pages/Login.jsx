@@ -16,11 +16,9 @@ export default function Login() {
         }
 
         axios.post(apiUrl + 'auth/signin', data).then((res) => {
-            if (res.data.success) {
-                localStorage.setItem('token', res.data.response.token);
-                localStorage.setItem('user', JSON.stringify(res.data.response.user));
-                setTimeout(() => window.location.replace('/'), 1000);
-            }
+            localStorage.setItem('token', res.data.response.token);
+            localStorage.setItem('user', JSON.stringify(res.data.response.user));
+            setTimeout(() => window.location.replace('/'), 1000);
         }).catch((err) => {
             console.log(err);
             if (err.response.data?.messages) {

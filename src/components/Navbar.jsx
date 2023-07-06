@@ -20,7 +20,7 @@ export default function Navbar() {
         }
     }
     let options = [
-        { to: '/', title: "Home", role: 0 },
+        { to: '/', title: "Home", role: 0 }, 
         { to: '/', title: "Comics", role: 0 },
         { to: '/register', title: "Register" , online: false},
         { to: '/login', title: "Login", online: false },
