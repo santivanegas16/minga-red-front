@@ -1,8 +1,9 @@
 import Close from '/img/close.png';
 import Profile from '/img/Profile_form.png';
-import { Link as Anchor } from 'react-router-dom';
+import { Link as Anchor, json } from 'react-router-dom';
 
 export default function Display({ options, show, setShow }) {
+    const connected = JSON.parse(localStorage.getItem('user'));
     return (
         <div className="fixed z-10 top-0 left-0 bg-gradient-to-r from-[#FF5722] to-[#F97316] w-full h-full lg:w-[430px] ">
             <div className='flex mt-5 ml-5'>
