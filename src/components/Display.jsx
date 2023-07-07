@@ -8,8 +8,7 @@ export default function Display({ options, show, setShow }) {
         <div className="fixed z-20 top-0 left-0 bg-gradient-to-r from-[#FF5722] to-[#F97316] w-full h-full lg:w-[430px] ">
             <div className='flex mt-5 ml-5'>
                 <img className='w-[46px] h-[46px] rounded-[50px]' src={connected ? connected.photo : Profile} alt='Perfil' />
-                <div className='flex flex-col ml-3 text-white font-poppins'>
-                    {/* <p className='text-base font-semibold'> </p> */}
+                <div className='flex justify-center items-center ml-3 text-white font-poppins'>
                     <p className='text-sm font-medium'> {connected?.email} </p>
                 </div>
             </div>

@@ -20,18 +20,11 @@ export default function Login() {
             localStorage.setItem('user', JSON.stringify(res.data.response.user));
             setTimeout(() => window.location.replace('/'), 1000);
         }).catch((err) => {
-            console.log(err);
-            if (err.response.data?.messages) {
-                Swal.fire({
-                    'icon': 'error',
-                    'html': err.response.data.messages.map(message => `<p>${message}</p>`).join('')
-                });
-            } else {
-                Swal.fire({
-                    'icon': 'error',
-                    'html': err.response.data.message.map(message => `<p>${message}</p>`).join('')
-                });
-            }
+            Swal.fire({
+                icon: 'error',
+                html: err.response.data.messages.map(message => `<p>${message}</p>`).join(''),
+                confirmButtonColor: "#F97316"
+            });
         });
     }
 

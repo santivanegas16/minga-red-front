@@ -20,12 +20,14 @@ export default function Register() {
         axios.post(apiUrl + "auth/register", newUser).then(() => {
             Swal.fire({
                 icon: "success",
-                text: "Register Success, Sign in pleas!"
+                text: "Register Success, Sign in pleas!",
+                confirmButtonColor: "#F97316"
             })
         }).then(() => navigate("/login")).catch((error) => {
             Swal.fire({
                 icon: "error",
-                html: error.response.data.messages.map(message => `<p>${message}</p>`).join("")
+                html: error.response.data.messages.map(message => `<p>${message}</p>`).join(""),
+                confirmButtonColor: "#F97316"
             })
         })
     }

@@ -23,24 +23,19 @@ export default function AuthorForm() {
         let headers = { headers: { 'Authorization': `Bearer ${localStorage.getItem("token")}` } }
         axios.post(apiUrl + "authors", data, headers).then(() => {
             Swal.fire({
-                "icon": "success",
-                "text" : "Author registered"
-             })
-             setTimeout(() => window.location.replace('/'), 1000)
+                icon: "success",
+                title: "Author registered",
+                confirmButtonColor: "#F97316"
+            })
+            setTimeout(() => navigate('/'), 1000)
         }
-        ).catch(error => {
-            if (error.response.data?.messages) {
-                Swal.fire({
-                    "icon": "error",
-                    "html": error.response.data.messages.map(each => `<p>${each}</p>`).join("")
-                })
-            } else {
-                Swal.fire({
-                    "icon": "error",
-                    "html": `<p>${error.response.data}</p>`
-                })
-            }
-        }
+        ).catch(error =>
+            Swal.fire({
+                icon: "error",
+                title: "Error Creating Author",
+                html: error.response.data.messages.map(each => `<p>${each}</p>`).join(""),
+                confirmButtonColor: "#F97316"
+            })
         )
     }
 
