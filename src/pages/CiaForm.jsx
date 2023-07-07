@@ -30,7 +30,7 @@ export default function CiaForm() {
                 "text" : "Company registered",
                 "confirmButtonColor": "#F97316"
              })
-             setTimeout(() => window.location.replace('/'), 1500)
+             setTimeout(() => navigate('/'), 1500)
         })
         .catch(error => {
             if (error.response.data?.messages) {
