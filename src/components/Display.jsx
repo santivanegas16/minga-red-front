@@ -1,6 +1,6 @@
 import Close from '/img/close.png';
 import Profile from '/img/Profile_form.png';
-import { Link as Anchor, json } from 'react-router-dom';
+import { Link as Anchor } from 'react-router-dom';
 
 export default function Display({ options, show, setShow }) {
     const connected = JSON.parse(localStorage.getItem('user'));
