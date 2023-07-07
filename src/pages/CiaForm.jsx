@@ -1,6 +1,56 @@
 import ButtonSend from '../components/ButtonSend'
+import { useNavigate } from 'react-router';
+import { useRef } from 'react';
+import apiUrl from "../apiUrl"
+import axios from "axios"
+import Swal from 'sweetalert2';
 
 export default function CiaForm() {
+    // Hook that allows redirections
+    const navigate = useNavigate()
+    // Hook that is used to create and manipulate references to DOM elements
+    const name = useRef()
+    const website = useRef()
+    const logo = useRef()
+    const description = useRef()
+
+    const companyForm = () => {
+        let data = {
+            name: name.current.value,
+            website: website.current.value,
+            logo: logo.current.value,
+            description: description.current.value
+        }
+        let headers = { headers: { 'Authorization': `Bearer ${localStorage.getItem("token")}` } }
+        axios.post(apiUrl + "companies", data, headers)
+        .then(() => {
+            Swal.fire({
+                "title": "New company",
+                "icon": "success",
+                "text" : "Company registered",
+                "confirmButtonColor": "#F97316"
+             })
+             setTimeout(() => window.location.replace('/'), 1500)
+        })
+        .catch(error => {
+            if (error.response.data?.messages) {
+                Swal.fire({
+                    "title": "Error creating a company",
+                    "icon": "error",
+                    "html": error.response.data.messages.map(each => `<p>${each}</p>`).join(""),
+                    "confirmButtonColor": "#FF5722"
+                })
+            } else {
+                Swal.fire({
+                    "title": "Error creating a company",
+                    "icon": "error",
+                    "html": `<p>${error.response.data}</p>`,
+                    "confirmButtonColor": "#FF5722"
+                })
+            }
+        }
+        )
+    }
     return (
         <div className='min-h-screen flex items-center mb-10 bg-gray-light font-poppins'>
 
@@ -22,22 +72,22 @@ export default function CiaForm() {
                                 <input
                                     className='border-b border-gray-border bg-transparent px-2 mt-[20px]'
                                     placeholder='Name' type="text"
-                                    name="name" id="name" />
+                                    ref={name} id="name" />
                                 <input
                                     className='border-b border-gray-border bg-transparent px-2'
                                     placeholder='Website' type="url"
-                                    name="url" id="wesite" />
+                                    ref={website} id="website" />
                                 <input
                                     className='border-b border-gray-border bg-transparent px-2'
-                                    placeholder='URL Profile Image'
-                                    type="url" name="profile-img" id="profile-img" />
+                                    placeholder='URL Profile Image' type="url"
+                                    ref={logo} id="logo" />
                                 <input
                                     className='border-b border-gray-border bg-transparent px-2'
-                                    placeholder='Description'
-                                    type="text" name="description" id="description" />
+                                    placeholder='Description' type="text"
+                                    ref={description} id="description" />
 
                                 <div className='flex flex-col justify-center items-center mb-[10px]'>
-                                    <ButtonSend />
+                                    <ButtonSend onClick={companyForm} />
                                 </div>
                             </div>
                         </form>
