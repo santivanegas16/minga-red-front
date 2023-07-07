@@ -12,10 +12,11 @@ export default function MangaForm() {
 	const navigate = useNavigate();
 
 	const create = () => {
+    let cat = categories.find(each=>each._id===category_id.current.value)
 		let data = {
 			title: title.current.value,
 			description: description.current.value,
-			category_id: category_id.current.value,
+			category_id: cat?._id,
 			cover_photo: cover_photo.current.value,
 		};
 
