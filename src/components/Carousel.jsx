@@ -28,10 +28,10 @@ export default function Carousel() {
         // console.log(counter)
     }
     return (
-        <div className='items-center justify-between rounded-lg mt-5 hidden px-5 lg:flex h-[260px]' style={{backgroundColor: categories[counter]?.hover}}>
+        <div className='items-center justify-between h-[265px] rounded-md mt-5 hidden px-5 lg:flex' style={{backgroundColor: categories[counter]?.hover}}>
             <img onClick={prev} className="left-8 cursor-pointer" src={prevIcon} alt='prev'></img>
-            <img className="object-cover w-[180px] lg:w-[200px] self-end" src={categories[counter]?.character_photo} alt='character'></img>
-            <img className="object-cover w-[150px] mb-12 self-end" src={categories[counter]?.cover_photo} alt='cover'></img>
+            <img className="object-cover w-[200px]  self-end" src={categories[counter]?.character_photo} alt='character'></img>
+            <img className="object-cover w-[179px]  mb-[22px] self-end" src={categories[counter]?.cover_photo} alt='cover'></img>
             <div className='w-[200px] lg:w-[300px] xl:w-[450px] text-l p-2 text-white xl:px-10'>
                 <h4 className='font-roboto text-2xl font-medium mb-2.5' style={{color: categories[counter]?.color}}>{categories[counter]?.name.toUpperCase()}</h4>
                 <p className='font-roboto text-sm font-normal leading-4' style={{color: categories[counter]?.color}}>{categories[counter]?.description}</p>
