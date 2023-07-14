@@ -46,6 +46,7 @@ export default function Navbar() {
                 } else if (user.role === 3) {
                     setOptions([
                         { to: '/', title: "Home" },
+                        { to: '/mangas/:page', title: "Mangas" },
                         { to: '/', title: "Sign Out", onClick: signout },
                     ]);
                 }
