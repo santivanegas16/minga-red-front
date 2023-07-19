@@ -4,6 +4,8 @@ import { useEffect } from 'react';
 import header from './header.js';
 import axios from 'axios';
 import apiUrl from './apiUrl.js';
+import store from './store/store'
+import { Provider } from 'react-redux';
 
 function App() {
 
@@ -15,7 +17,9 @@ function App() {
 	}, [])
 
 	return (
+		<Provider store={store}>
 		<RouterProvider router={router} />
+		</Provider>
 	)
 }
 
