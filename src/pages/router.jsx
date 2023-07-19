@@ -7,7 +7,8 @@ import Main from '../layouts/Main'
 import AuthorForm from './AuthorForm'
 import MangaForm from './MangaForm';
 import Login from './Login';
-import ChapterForm from "./ChapterForm";
+import ChapterForm from './ChapterForm';
+import Mangas from './Mangas';
 
 const router = createBrowserRouter([
     //necesita que pasemos un array de objetos
@@ -34,7 +35,7 @@ const router = createBrowserRouter([
             {
                 path: '/cia-form', element: <CiaForm />, loader: async () => {
                     let user = JSON.parse(localStorage.getItem("user"))
-                    
+
                     user ? user = { role: user.role } : user = { role: 1 }
 
                     return (user.role === 1 || user.role === 2 || user.role === 3) && redirect("/not-allowed")
@@ -43,7 +44,7 @@ const router = createBrowserRouter([
             {
                 path: '/author-form', element: <AuthorForm />, loader: async () => {
                     let user = JSON.parse(localStorage.getItem("user"))
-                    
+
                     user ? user = { role: user.role } : user = { role: 1 }
 
                     return (user.role === 1 || user.role === 2 || user.role === 3) && redirect("/not-allowed")
@@ -54,17 +55,26 @@ const router = createBrowserRouter([
                     let user = JSON.parse(localStorage.getItem("user"))
 
                     user ? user = { role: user.role } : user = { role: 0 }
-                    
+
                     return (user.role === 0 || user.role === 3) && redirect("/not-allowed")
                 }
             },
             {
                 path: '/:manga_id/chapther-form', element: <ChapterForm />, loader: async () => {
                     let user = JSON.parse(localStorage.getItem("user"))
-                    
+
                     user ? user = { role: user.role } : user = { role: 0 }
 
                     return (user.role === 0 || user.role === 3) && redirect("/not-allowed")
+                }
+            },
+            {
+                path: '/mangas/:page', element: <Mangas />, loader: async () => {
+                    let user = JSON.parse(localStorage.getItem('user'));
+
+                    user ? user = { role: user.role, online: true } : user = { role: 0, online: false }
+
+                    return (user.online === false) && redirect("/not-allowed")
                 }
             },
             { path: '/not-allowed', element: <NotAllowed /> },
