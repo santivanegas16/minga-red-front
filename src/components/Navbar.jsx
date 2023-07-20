@@ -35,18 +35,27 @@ export default function Navbar() {
                         { to: '/cia-form', title: "New Company" },
                         { to: '/', title: "Sign Out", onClick: signout },
                     ]);
-                } else if (user.role === 1 || user.role === 2) {
+                } else if (user.role === 2) {
                     setOptions([
                         { to: '/', title: "Home" },
                         { to: '/mangas/:page', title: "Mangas" },
                         { to: '/manga-form', title: "New Manga" },
-                        { to: '/:manga_id/chapther-form', title: "New Chapter" }, // falta agregar
+                        { to: '/:manga_id/chapther-form', title: "New Chapter" },
                         { to: '/', title: "Sign Out", onClick: signout },
                     ]);
                 } else if (user.role === 3) {
                     setOptions([
                         { to: '/', title: "Home" },
                         { to: '/mangas/:page', title: "Mangas" },
+                        { to: '/', title: "Sign Out", onClick: signout },
+                    ]);
+                } else if (user.role === 1) {
+                    setOptions([
+                        { to: '/', title: "Home" },
+                        { to: '/mangas/:page', title: "Mangas" },
+                        { to: '/manga-form', title: "New Manga" },
+                        { to: '/:manga_id/chapther-form', title: "New Chapter" },
+                        { to: '/me', title: "Profile" },
                         { to: '/', title: "Sign Out", onClick: signout },
                     ]);
                 }
