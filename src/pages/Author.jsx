@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import Profile from '/img/Profile_form.png';
 import apiUrl from '../apiUrl';
 import axios from 'axios';
 
@@ -18,7 +17,8 @@ export default function Author() {
         },[]
     )
     
-    const date = new Date(author?.createdAt)
+    const date = author?.date ? new Date(author?.date) : ''
+    
     const options = { day: '2-digit', month: '2-digit', year: 'numeric' };
     const formattedDate = date.toLocaleString('es-ES', options)
    
