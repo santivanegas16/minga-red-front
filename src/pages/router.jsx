@@ -9,6 +9,7 @@ import MangaForm from './MangaForm';
 import Login from './Login';
 import ChapterForm from './ChapterForm';
 import Mangas from './Mangas';
+import Author from "./Author";
 
 const router = createBrowserRouter([
     //necesita que pasemos un array de objetos
@@ -75,6 +76,15 @@ const router = createBrowserRouter([
                     user ? user = { role: user.role, online: true } : user = { role: 0, online: false }
 
                     return (user.online === false) && redirect("/not-allowed")
+                }
+            },
+            {
+                path: '/me', element: <Author />, loader: async () => {
+                    let user = JSON.parse(localStorage.getItem("user"))
+
+                    user ? user = { role: user.role } : user = { role: 0 }
+
+                    return (user.role === 0 || user.role === 3 || user.role === 2) && redirect("/not-allowed")
                 }
             },
             { path: '/not-allowed', element: <NotAllowed /> },
