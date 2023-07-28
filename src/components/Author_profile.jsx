@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import authorActions from '../store/actions/authors'
 
 
-const {saveProfile} = authorActions
+const { saveProfile } = authorActions
 
 export default function Author_profile() {
 
@@ -18,7 +18,7 @@ export default function Author_profile() {
     const profile = store.authors.profile
     useEffect(
         () => {
-            if(!profile?.name) { // si y solo si no existen los datos del author en el store de redux realizo la peticion correspondiente para obtener los datos
+            if (!profile?.name) { // si y solo si no existen los datos del author en el store de redux realizo la peticion correspondiente para obtener los datos
                 let headers = { headers: { 'Authorization': `Bearer ${localStorage.getItem("token")}` } }
                 axios(apiUrl + "authors/me", headers)
                     .then(res => {
@@ -27,12 +27,12 @@ export default function Author_profile() {
                         //debemos setiar correctamente la variable de estado global correspondiente
                         //despacho la accion correspondiente para cargar esos datos en el store de redux
                         dispatch(saveProfile({
-                            profile : res.data.response.profile
+                            profile: res.data.response.profile
                         }))
                     })
                     .catch(err => console.log(err))
             }
-            
+
         }, []
     )
 

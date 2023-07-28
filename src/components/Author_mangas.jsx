@@ -7,7 +7,7 @@ import mangasActions from '../store/actions/mangas'
 
 const { saveMangasNews } = mangasActions
 
-export default function Author_mangas({switc}) {
+export default function Author_mangas({ toggle }) {
 
     const dispatch = useDispatch()
     const store = useSelector(store => store)
@@ -23,7 +23,7 @@ export default function Author_mangas({switc}) {
 
     useEffect(
         () => {
-            if (!logoMangas && (allMangas.length === 0) && (oldMangas.length === 0) && (newMangas.length === 0)) {
+            if (!logoMangas && (allMangas?.length === 0) && (oldMangas?.length === 0) && (newMangas?.length === 0)) {
                 let headers = { headers: { 'Authorization': `Bearer ${localStorage.getItem("token")}` } }
                 axios(apiUrl + "mangas/news", headers)
                     .then(res => {
@@ -72,7 +72,7 @@ export default function Author_mangas({switc}) {
                     </div>
 
                 </div> : ""}
-            {(switc) ?
+            {(toggle) ?
                 <div className='flex flex-col items-center '>
                     <div className="grid max-[400px]:grid-cols-1 grid-cols-2 lg:grid-cols-4 gap-5 w-full md:w-[70%] mt-10 justify-items-center ">
                         {newMangas?.map((each, index) => (
