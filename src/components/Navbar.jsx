@@ -30,7 +30,7 @@ export default function Navbar() {
                 if (user.role === 0) {
                     setOptions([
                         { to: '/', title: "Home" },
-                        { to: '/mangas/:page', title: "Mangas" },
+                        { to: '/mangas/1', title: "Mangas" },
                         { to: '/author-form', title: "New Author" },
                         { to: '/cia-form', title: "New Company" },
                         { to: '/', title: "Sign Out", onClick: signout },
@@ -38,7 +38,7 @@ export default function Navbar() {
                 } else if (user.role === 2) {
                     setOptions([
                         { to: '/', title: "Home" },
-                        { to: '/mangas/:page', title: "Mangas" },
+                        { to: '/mangas/1', title: "Mangas" },
                         { to: '/manga-form', title: "New Manga" },
                         { to: '/:manga_id/chapther-form', title: "New Chapter" },
                         { to: '/', title: "Sign Out", onClick: signout },
@@ -46,13 +46,13 @@ export default function Navbar() {
                 } else if (user.role === 3) {
                     setOptions([
                         { to: '/', title: "Home" },
-                        { to: '/mangas/:page', title: "Mangas" },
+                        { to: '/mangas/1', title: "Mangas" },
                         { to: '/', title: "Sign Out", onClick: signout },
                     ]);
                 } else if (user.role === 1) {
                     setOptions([
                         { to: '/', title: "Home" },
-                        { to: '/mangas/:page', title: "Mangas" },
+                        { to: '/mangas/1', title: "Mangas" },
                         { to: '/manga-form', title: "New Manga" },
                         { to: '/:manga_id/chapther-form', title: "New Chapter" },
                         { to: '/me', title: "Profile" },
