@@ -8,8 +8,8 @@ import Headers from '../header.js';
 import Card from '../components/Card_manga';
 import Category from '../components/Category_mangas';
 import { useSelector, useDispatch } from 'react-redux';
-import manga_action from '../store/actions/manga.js';
-const { save_title } = manga_action;
+import mangasActions from '../store/actions/mangas';
+const { save_title } = mangasActions;
 
 export default function Mangas() {
 

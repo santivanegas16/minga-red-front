@@ -1,9 +1,10 @@
-import { useEffect, useState } from 'react';
+import { useEffect} from 'react';
 import apiUrl from '../apiUrl';
 import axios from 'axios';
 import ButtonManage from './ButtonManage';
 import { useDispatch, useSelector } from 'react-redux';
 import mangasActions from '../store/actions/mangas'
+import { Link as Anchor } from 'react-router-dom';
 
 const { saveMangasNews } = mangasActions
 
@@ -65,7 +66,9 @@ export default function Author_mangas({ toggle }) {
                     <div className="grid max-[400px]:grid-cols-1 grid-cols-2 lg:grid-cols-4 gap-5 w-full md:w-[70%] mt-2 justify-items-center">
                         {allMangas?.map((each, index) => (
                             <div key={index}>
-                                <img className="w-[174px] h-[211px] object-cover rounded-2xl " src={each?.cover_photo} />
+                                <Anchor to={'manga/' + each._id}>
+                                    <img className="w-[174px] h-[211px] object-cover rounded-2xl transition hover:scale-110 cursor-pointer" src={each?.cover_photo} />
+                                </Anchor>
                                 <h1 className='font-roboto font-normal text-lg mt-2'>{each?.title}</h1>
                             </div>
                         ))}
@@ -76,8 +79,10 @@ export default function Author_mangas({ toggle }) {
                 <div className='flex flex-col items-center '>
                     <div className="grid max-[400px]:grid-cols-1 grid-cols-2 lg:grid-cols-4 gap-5 w-full md:w-[70%] mt-10 justify-items-center ">
                         {newMangas?.map((each, index) => (
-                            <div className="" key={index}>
-                                <img className="w-[174px] h-[211px] object-cover rounded-2xl transition hover:scale-110 cursor-pointer" src={each?.cover_photo} />
+                            <div key={index}>
+                                <Anchor to={'/manga/'+each._id}>
+                                    <img  className="w-[174px] h-[211px] object-cover rounded-2xl transition hover:scale-110 cursor-pointer" src={each?.cover_photo} />
+                                </Anchor>
                                 <h1 className='font-roboto font-normal text-lg mt-3'>{each?.title}</h1>
                             </div>
                         ))}
@@ -86,8 +91,10 @@ export default function Author_mangas({ toggle }) {
                 </div> : <div className='flex flex-col items-center '>
                     <div className="grid max-[400px]:grid-cols-1 grid-cols-2 lg:grid-cols-4 gap-5 w-full md:w-[70%] mt-10 justify-items-center ">
                         {oldMangas?.map((each, index) => (
-                            <div className="" key={index}>
-                                <img className="w-[174px] h-[211px] object-cover rounded-2xl transition hover:scale-110 cursor-pointer" src={each?.cover_photo} />
+                            <div key={index}>
+                                <Anchor to={'/manga/' + each._id}>
+                                    <img  className="w-[174px] h-[211px] object-cover rounded-2xl transition hover:scale-110 cursor-pointer" src={each?.cover_photo} />
+                                </Anchor>
                                 <h1 className='font-roboto font-normal text-lg mt-3'>{each?.title}</h1>
                             </div>
                         ))}
