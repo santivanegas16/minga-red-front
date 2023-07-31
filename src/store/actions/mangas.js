@@ -11,8 +11,14 @@ let saveMangasNews = createAction(
     }
 )
 
+const save_title = createAction('save_title', obj => {
+    return { payload: { text: obj.title } }
+})
+
+
 const mangasActions = {
-    saveMangasNews
+    saveMangasNews,
+    save_title
 }
 
 export default mangasActions
