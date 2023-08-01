@@ -11,14 +11,14 @@ export default function AuthorForm() {
 
     const navigate = useNavigate()
     const authorForm = () => {
-        const [city, country] = city_country.current.value.split(",")
+        const [city, country] = city_country.current?.value.split(",")
         let data = {
-            name: name.current.value.trim(),
-            last_name: last_name.current.value.trim(),
-            city: city.trim(),
-            country: country.trim(),
-            date: date.current.value.trim(),
-            photo: photo.current.value.trim()
+            name: name.current?.value.trim(),
+            last_name: last_name.current?.value.trim(),
+            city: city?.trim(),
+            country: country?.trim(),
+            date: date.current?.value.trim(),
+            photo: photo.current?.value.trim()
         }
         let headers = { headers: { 'Authorization': `Bearer ${localStorage.getItem("token")}` } }
         axios.post(apiUrl + "authors", data, headers).then(() => {
