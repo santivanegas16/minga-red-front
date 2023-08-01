@@ -11,6 +11,7 @@ import ChapterForm from './ChapterForm';
 import Mangas from './Mangas';
 import Author from "./Author";
 import MangaDetail from "./MangaDetail";
+import Chapter from "./Chapter";
 
 const router = createBrowserRouter([
     //necesita que pasemos un array de objetos
@@ -91,6 +92,15 @@ const router = createBrowserRouter([
             {
                 path: '/manga/:manga_id/:page', element: <MangaDetail />, loader: async () => {
                     let user = JSON.parse(localStorage.getItem("user"))
+
+                    user ? user = { role: user.role, online: true } : user = { role: 0, online: false }
+
+                    return (user.online === false) && redirect("/not-allowed")
+                }
+            },
+            {
+                path: '/chapter/:id/:page', element: <Chapter />, loader: async () => {
+                    let user = JSON.parse(localStorage.getItem('user'));
 
                     user ? user = { role: user.role, online: true } : user = { role: 0, online: false }
 
