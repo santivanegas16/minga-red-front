@@ -8,13 +8,19 @@ import { useParams } from 'react-router-dom';
 import Category from '../components/Category_mangas';
 import Switch_manga_chapters from '../components/Switch_manga_chapters';
 import { Link as Anchor } from 'react-router-dom';
+import { useSelector, useDispatch } from "react-redux";
+import mangasActions from '../store/actions/mangas'
+
+const { saveMangaDetail } = mangasActions
 
 export default function MangaDetail() {
 
+  const dispatch = useDispatch()
+  const store = useSelector(store => store)
+  const Manga = store.mangas.manga_detail
+
   const { manga_id, page } = useParams()
 
-
-  const [Manga, setManga] = useState([])
   const [Chapters, setChapters] = useState([])
   const [toggle, setToggle] = useState(true)
 
@@ -23,7 +29,7 @@ export default function MangaDetail() {
       let headers = { headers: { 'Authorization': `Bearer ${localStorage.getItem("token")}` } }
       axios(apiUrl + "mangas/" + manga_id, headers)
         .then(res => {
-          setManga(res.data.response.manga)
+          dispatch(saveMangaDetail({ manga_detail: res.data.response.manga }))
         })
         .catch(err => console.log(err))
     }, []
@@ -48,7 +54,7 @@ export default function MangaDetail() {
           <div className='px-5 md:flex md:flex-col md:items-center'>
             <img className="h-[352px] object-contain" src={Manga?.cover_photo} />
             {toggle ?
-              <h1 className="max-[350px]:text-[30px] text-[40px] font-normal w-min md:w-full font-poppins text-justify sm:text-center leading-none pt-2">{Manga.title}</h1>
+              <h1 className="max-[350px]:text-[30px] text-[40px] font-normal w-min md:w-full font-poppins text-justify sm:text-center leading-none pt-2">{Manga?.title}</h1>
               :
               <h1 className="max-[350px]:text-[20px] text-[20px] font-normal w-min md:w-full font-poppins text-justify sm:text-center leading-none pt-2">Chapters</h1>
             }
@@ -56,8 +62,8 @@ export default function MangaDetail() {
           {toggle ?
             <div>
               <div className='flex justify-between pt-2 px-5'>
-                <Category key={Manga.category_id?.name} name={Manga.category_id?.name} color={Manga.category_id?.color} hover={Manga.category_id?.hover} />
-                <h2 className='font-poppins font-medium text-xl text-[#9D9D9D]'>{Manga.author_id?.name.charAt(0).toUpperCase()}{Manga.author_id?.name.slice(1).toLowerCase()}</h2>
+                <Category key={Manga?.category_id?.name} name={Manga?.category_id?.name} color={Manga?.category_id?.color} hover={Manga?.category_id?.hover} />
+                <h2 className='font-poppins font-medium text-xl text-[#9D9D9D]'>{Manga?.author_id?.name.charAt(0).toUpperCase()}{Manga?.author_id?.name.slice(1).toLowerCase()}</h2>
               </div>
               <div className="pt-5">
                 <img src={reactions} />
@@ -75,7 +81,7 @@ export default function MangaDetail() {
             <div className="w-full flex flex-col items-center pt-5">
               {Chapters.map((each, index) => (
                 <div key={index} className="flex py-5 px-5">
-                  <Anchor to={'/chapters/' + each._id + '/1'}>
+                  <Anchor to={'/chapter/' + each._id + '/0'}>
                     <img className="transition hover:scale-110 cursor-pointer w-[83px] lg:w-[150px] h-[74px] lg:h-[120px] object-cover mr-5 lg:mr-10 rounded-lg" src={each?.cover_photo} alt="Chapter Photo" />
                   </Anchor>
                   <div className="flex flex-col justify-between">
@@ -86,15 +92,13 @@ export default function MangaDetail() {
                     </div>
                   </div>
                   <div className="flex justify-center items-center">
-                    <Anchor to={'/chapters/' + each._id + '/1'} className='transition hover:scale-95 bg-gradient-to-r from-[#FF5722] to-[#F97316] text-white text-2xl cursor-pointer font-poppins font-bold py-3 w-[151px] rounded-full text-center ml-5 lg:ml-10 h-full lg:h-1/2'>Read</Anchor>
+                    <Anchor to={'/chapter/' + each._id + '/0'} className='flex justify-center items-center transition hover:scale-95 bg-gradient-to-r from-[#FF5722] to-[#F97316] text-white text-2xl cursor-pointer font-poppins font-bold py-3 w-[151px] rounded-full ml-5 lg:ml-10 h-full lg:h-1/2'>Read</Anchor>
                   </div>
                 </div>
               ))}
             </div>}
         </div>
       </div>
-
-
     </main>
   )
 }
