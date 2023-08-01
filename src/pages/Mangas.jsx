@@ -9,7 +9,8 @@ import Card from '../components/Card_manga';
 import Category from '../components/Category_mangas';
 import { useSelector, useDispatch } from 'react-redux';
 import mangasActions from '../store/actions/mangas';
-const { save_title } = mangasActions;
+const { save_title, save_checks } = mangasActions;
+let checkeds = [];
 
 export default function Mangas() {
 
@@ -17,13 +18,10 @@ export default function Mangas() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    console.log(store);
-
     const [mangas, setMangas] = useState([]);
     const [next, setNext] = useState(null);
     const [prev, setPrev] = useState(null);
     const [categories, setCategories] = useState([]);
-    const [checks, setChecks] = useState([]);
     const { page } = useParams();
 
     const actionNextOrPrev = (numberPage) => {
@@ -35,22 +33,29 @@ export default function Mangas() {
     }, [])
 
     useEffect(() => {
-        axios.get(apiUrl + `mangas?title=${store.mangas.text}&page=${page}`, Headers()).then(res => {
+        axios.get(apiUrl + `mangas?title=${store.mangas.text}&page=${page}&category=${checkeds.join(',')}`, Headers()).then(res => {
             setMangas(res.data.response.mangas);
             setNext(res.data.response.next);
             setPrev(res.data.response.prev);
         }).catch(error => console.log(error));
-    }, [store.mangas.text, page])
+    }, [store.mangas.text, page, checkeds])
 
-    useEffect(() => {
-        console.log(checks);
-    }, [checks])
+    const actionsChecks = (e) => {
+        if (!checkeds.includes(e.target.id)) {
+            checkeds.push(e.target.id)
+        } else {
+            checkeds = checkeds.filter(element => element !== e.target.id)
+        }
+        console.log(checkeds.join(','));
+        // dispatch(save_checks({ checks: checkeds }));
+        // console.log(store.mangas.checks)
+    }
 
     return (
         <main>
             <div className='w-full h-[369px] bg-cover bg-center flex flex-col items-center justify-center' style={{ backgroundImage: `url(${Bg_mangas})` }}>
                 <h1 className='w-[168px] h-[38px] font-poppins font-bold text-[40px] leading-[38.07px] m-10 text-white'> Mangas </h1>
-                <div className='flex items-center w-[393px] rounded-[80px] bg-black'> 
+                <div className='flex items-center w-[393px] rounded-[80px] bg-black'>
                     <span className='absolute w-[37px] h-[37px] m-5'> <img src={Search} alt="Search" /> </span>
                     <input onChange={(e) => dispatch(save_title({ title: e.target.value }))} defaultValue={store.mangas.text}
                         className='font-poppins font-normal text-[24px] leading-[22.84px] p-[10px] text-center w-full rounded-[80px] border-2 hover:border-[#F97316]'
@@ -60,7 +65,7 @@ export default function Mangas() {
             </div>
             <div className='bg-[#EBEBEB] relative -top-[70px] w-[430px] rounded-t-[80px] flex flex-col'>
                 <div className='flex justify-around w-full h-[40px] mt-12'>
-                    {categories.map(category => <Category key={category._id} name={category.name} color={category.color} hover={category.hover} value={category._id} action={(e) => { setChecks([e.target.id]) }} />)}
+                    {categories.map(category => <Category key={category._id} name={category.name} color={category.color} hover={category.hover} value={category._id} action={(e) => { actionsChecks(e) }} />)}
                 </div>
                 <div className='h-full flex flex-col items-center justify-around'>
                     {mangas.map((manga) => <Card key={manga._id} title={manga.title} image={manga.cover_photo} type={manga.category_id.name} color={manga.category_id.color} />)}
