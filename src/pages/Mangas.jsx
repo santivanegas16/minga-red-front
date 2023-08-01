@@ -68,7 +68,7 @@ export default function Mangas() {
                     {categories.map(category => <Category key={category._id} name={category.name} color={category.color} hover={category.hover} value={category._id} action={(e) => { actionsChecks(e) }} />)}
                 </div>
                 <div className='grid grid-cols-1 lg:grid-cols-2 w-full md:w-[70%] mt-2 justify-items-center'>
-                    {mangas.map((manga) => <Card key={manga._id} title={manga.title} image={manga.cover_photo} type={manga.category_id.name} color={manga.category_id.color} />)}
+                    {mangas.map((manga) => <Card manga_id={manga._id} key={manga._id} title={manga.title} image={manga.cover_photo} type={manga.category_id.name} color={manga.category_id.color} />)}
                 </div>
                 <div className="flex justify-center items-center pt-5">
                     {prev && <button className='bg-gradient-to-r from-[#FF5722] to-[#F97316] text-white rounded-full m-5 w-[100px] h-[40px] transition hover:scale-110' value={prev} onClick={(e) => { actionNextOrPrev(e.target.value) }}>Prev</button>}
