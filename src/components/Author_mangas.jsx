@@ -17,11 +17,6 @@ export default function Author_mangas({ toggle }) {
     const newMangas = store.mangas.new
     const oldMangas = store.mangas.old
 
-    // const [logoMangas, setlogoMangas] = useState("")
-    // const [allMangas, setallMangas] = useState([])
-    // const [newMangas, setnewMangas] = useState([])
-    // const [oldMangas, setoldMangas] = useState([])
-
     useEffect(
         () => {
             if (!logoMangas && (allMangas?.length === 0) && (oldMangas?.length === 0) && (newMangas?.length === 0)) {
@@ -29,22 +24,18 @@ export default function Author_mangas({ toggle }) {
                 axios(apiUrl + "mangas/news", headers)
                     .then(res => {
                         if (res.data.response.logo) {
-                            // setlogoMangas(res.data.response.logo)
                             dispatch(saveMangasNews({
                                 mangas_news: {
                                     logo: res.data.response.logo
                                 }
                             }))
                         } else if (res.data.response.all) {
-                            // setallMangas(res.data.response.all)
                             dispatch(saveMangasNews({
                                 mangas_news: {
                                     all: res.data.response.all
                                 }
                             }))
                         } else {
-                            // setnewMangas(res.data.response.new)
-                            // setoldMangas(res.data.response.old)
                             dispatch(saveMangasNews({
                                 mangas_news: {
                                     new: res.data.response.new,
@@ -66,7 +57,7 @@ export default function Author_mangas({ toggle }) {
                     <div className="grid max-[400px]:grid-cols-1 grid-cols-2 lg:grid-cols-4 gap-5 w-full md:w-[70%] mt-2 justify-items-center">
                         {allMangas?.map((each, index) => (
                             <div key={index}>
-                                <Anchor to={'manga/' + each._id}>
+                                <Anchor to={'/manga/' + each._id +'/1'}>
                                     <img className="w-[174px] h-[211px] object-cover rounded-2xl transition hover:scale-110 cursor-pointer" src={each?.cover_photo} />
                                 </Anchor>
                                 <h1 className='font-roboto font-normal text-lg mt-2'>{each?.title}</h1>
@@ -80,7 +71,7 @@ export default function Author_mangas({ toggle }) {
                     <div className="grid max-[400px]:grid-cols-1 grid-cols-2 lg:grid-cols-4 gap-5 w-full md:w-[70%] mt-10 justify-items-center ">
                         {newMangas?.map((each, index) => (
                             <div key={index}>
-                                <Anchor to={'/manga/'+each._id}>
+                                <Anchor to={'/manga/'+each._id+'/1'}>
                                     <img  className="w-[174px] h-[211px] object-cover rounded-2xl transition hover:scale-110 cursor-pointer" src={each?.cover_photo} />
                                 </Anchor>
                                 <h1 className='font-roboto font-normal text-lg mt-3'>{each?.title}</h1>
@@ -92,7 +83,7 @@ export default function Author_mangas({ toggle }) {
                     <div className="grid max-[400px]:grid-cols-1 grid-cols-2 lg:grid-cols-4 gap-5 w-full md:w-[70%] mt-10 justify-items-center ">
                         {oldMangas?.map((each, index) => (
                             <div key={index}>
-                                <Anchor to={'/manga/' + each._id}>
+                                <Anchor to={'/manga/' + each._id +'/1'}>
                                     <img  className="w-[174px] h-[211px] object-cover rounded-2xl transition hover:scale-110 cursor-pointer" src={each?.cover_photo} />
                                 </Anchor>
                                 <h1 className='font-roboto font-normal text-lg mt-3'>{each?.title}</h1>
