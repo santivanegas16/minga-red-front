@@ -8,7 +8,7 @@ import apiUrl from '../apiUrl';
 import header from '../header';
 import { useDispatch, useSelector } from 'react-redux';
 import chapter_actions from '../store/actions/chapters';
-let { save_title, save_number } = chapter_actions;
+let { saveTitle, save_number } = chapter_actions;
 
 export default function Chapter() {
 
@@ -26,7 +26,7 @@ export default function Chapter() {
             setPages(res.data.response.chapter.pages);
             setNext(res.data.response.next);
             dispatch(save_number({ number: res.data.response.chapter.order }))
-            dispatch(save_title({ title: res.data.response.chapter.title }))
+            dispatch(saveTitle({ title: res.data.response.chapter.title }))
             if (page >= 0) { setCount(parseInt(page)) };
         }).catch(error => console.log(error));
     }, [])
