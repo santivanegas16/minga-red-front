@@ -4,7 +4,7 @@ import comment from "/img/icon_comment.svg"
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import apiUrl from '../apiUrl';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import Category from '../components/Category_mangas';
 import Switch_manga_chapters from '../components/Switch_manga_chapters';
 import { Link as Anchor } from 'react-router-dom';
@@ -16,6 +16,7 @@ const { saveMangaDetail } = mangasActions
 export default function MangaDetail() {
 
   const dispatch = useDispatch()
+  const navigate = useNavigate();
   const store = useSelector(store => store)
   const Manga = store.mangas.manga_detail
 
@@ -23,6 +24,12 @@ export default function MangaDetail() {
 
   const [Chapters, setChapters] = useState([])
   const [toggle, setToggle] = useState(true)
+  const [next, setNext] = useState(null);
+  const [prev, setPrev] = useState(null);
+
+  const actionNextOrPrev = (page) => {
+    navigate(`/manga/${manga_id}/${page}`);
+  }
 
   useEffect(
     () => {
@@ -41,10 +48,11 @@ export default function MangaDetail() {
       axios(apiUrl + "chapters/?manga_id=" + manga_id + "&page=" + page, headers)
         .then(res => {
           setChapters(res.data.response.chapters)
-          console.log(res)
+          setNext(res.data.response.next);
+          setPrev(res.data.response.prev);
         })
         .catch(err => console.log(err))
-    }, []
+    }, [page]
   )
 
   return (
@@ -96,6 +104,10 @@ export default function MangaDetail() {
                   </div>
                 </div>
               ))}
+              <div>
+                {prev && <button className='bg-gradient-to-r from-[#FF5722] to-[#F97316] text-white rounded-full m-5 w-[100px] h-[40px] transition hover:scale-110' value={prev} onClick={(e) => { actionNextOrPrev(e.target.value) }}>Prev</button>}
+                {next && <button className='bg-gradient-to-r from-[#FF5722] to-[#F97316] text-white rounded-full m-5 w-[100px] h-[40px] transition hover:scale-110' value={next} onClick={(e) => { actionNextOrPrev(e.target.value) }}>Next</button>}
+              </div>
             </div>}
         </div>
       </div>
