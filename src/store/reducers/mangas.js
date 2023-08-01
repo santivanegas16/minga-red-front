@@ -25,7 +25,7 @@ const mangaReducer = createReducer(
         }
         return newState
     }).addCase(save_title, (state, action) => {
-        const newState = { ...state, text: action.payload.title?.text }
+        const newState = { ...state, text: action.payload?.text }
         return newState;
     }).addCase(saveMangaDetail, (state, action) => {
         const newState = { ...state, manga_detail: action.payload?.manga_detail }

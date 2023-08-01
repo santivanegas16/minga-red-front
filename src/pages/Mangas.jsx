@@ -10,6 +10,7 @@ import Category from '../components/Category_mangas';
 import { useSelector, useDispatch } from 'react-redux';
 import mangasActions from '../store/actions/mangas';
 const { save_title, save_checks } = mangasActions;
+let checkeds = [];
 
 export default function Mangas() {
 
@@ -17,14 +18,11 @@ export default function Mangas() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    console.log(store);
-
     const [mangas, setMangas] = useState([]);
     const [next, setNext] = useState(null);
     const [prev, setPrev] = useState(null);
     const [categories, setCategories] = useState([]);
     const { page } = useParams();
-    let checkeds = [];
 
     const actionNextOrPrev = (numberPage) => {
         navigate(`/mangas/${numberPage}`);
@@ -35,21 +33,22 @@ export default function Mangas() {
     }, [])
 
     useEffect(() => {
-        axios.get(apiUrl + `mangas?title=${store.mangas.text}&page=${page}`, Headers()).then(res => {
+        axios.get(apiUrl + `mangas?title=${store.mangas.text}&page=${page}&category=${checkeds.join(',')}`, Headers()).then(res => {
             setMangas(res.data.response.mangas);
             setNext(res.data.response.next);
             setPrev(res.data.response.prev);
         }).catch(error => console.log(error));
-    }, [store.mangas.text, page])
+    }, [store.mangas.text, page, checkeds])
 
     const actionsChecks = (e) => {
-        console.log(store.mangas.checks);
         if (!checkeds.includes(e.target.id)) {
             checkeds.push(e.target.id)
-            dispatch(save_checks({ checks: []}))
         } else {
-            console.log('if ' + checkeds);
+            checkeds = checkeds.filter(element => element !== e.target.id)
         }
+        console.log(checkeds.join(','));
+        // dispatch(save_checks({ checks: checkeds }));
+        // console.log(store.mangas.checks)
     }
 
     return (
