@@ -17,6 +17,8 @@ export default function Mangas() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
+    console.log(store);
+
     const [mangas, setMangas] = useState([]);
     const [next, setNext] = useState(null);
     const [prev, setPrev] = useState(null);
