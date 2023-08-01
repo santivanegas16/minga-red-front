@@ -35,7 +35,7 @@ export default function MangaDetail() {
             {toggle ?
               <h1 className="max-[350px]:text-[30px] text-[40px] font-normal w-min md:w-full font-poppins text-justify sm:text-center leading-none pt-2">{Manga.title}</h1>
               :
-              <h1 className="max-[350px]:text-[30px] text-[40px] font-normal w-min md:w-full font-poppins text-justify sm:text-center leading-none pt-2">Chapters</h1>
+              <h1 className="max-[350px]:text-[20px] text-[40px] font-normal w-min md:w-full font-poppins text-justify sm:text-center leading-none pt-2">Chapters</h1>
             }
           </div>
           {toggle ?
