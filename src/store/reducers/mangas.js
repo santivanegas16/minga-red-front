@@ -9,7 +9,7 @@ const initialState = {
     old: [],
     all: [],
     logo: "",
-    text: ''
+    text: ""
 }
 
 const mangaReducer = createReducer(
@@ -31,7 +31,7 @@ const mangaReducer = createReducer(
         .addCase(
             save_title,
             (state, action) => {
-                const newState = { ...state, text: action.payload.title?.text }
+                const newState = { ...state, text: action.payload?.text }
                 return newState;
             })
 )
