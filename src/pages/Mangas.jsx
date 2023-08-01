@@ -9,7 +9,8 @@ import Card from '../components/Card_manga';
 import Category from '../components/Category_mangas';
 import { useSelector, useDispatch } from 'react-redux';
 import mangasActions from '../store/actions/mangas';
-const { save_title } = mangasActions;
+const { save_title, save_checks } = mangasActions;
+let checkeds = [];
 
 export default function Mangas() {
 
@@ -17,13 +18,10 @@ export default function Mangas() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    console.log(store);
-
     const [mangas, setMangas] = useState([]);
     const [next, setNext] = useState(null);
     const [prev, setPrev] = useState(null);
     const [categories, setCategories] = useState([]);
-    const [checks, setChecks] = useState([]);
     const { page } = useParams();
 
     const actionNextOrPrev = (numberPage) => {
@@ -35,16 +33,23 @@ export default function Mangas() {
     }, [])
 
     useEffect(() => {
-        axios.get(apiUrl + `mangas?title=${store.mangas.text}&page=${page}`, Headers()).then(res => {
+        axios.get(apiUrl + `mangas?title=${store.mangas.text}&page=${page}&category=${checkeds.join(',')}`, Headers()).then(res => {
             setMangas(res.data.response.mangas);
             setNext(res.data.response.next);
             setPrev(res.data.response.prev);
         }).catch(error => console.log(error));
-    }, [store.mangas.text, page])
+    }, [store.mangas.text, page, checkeds])
 
-    useEffect(() => {
-        console.log(checks);
-    }, [checks])
+    const actionsChecks = (e) => {
+        if (!checkeds.includes(e.target.id)) {
+            checkeds.push(e.target.id)
+        } else {
+            checkeds = checkeds.filter(element => element !== e.target.id)
+        }
+        console.log(checkeds.join(','));
+        // dispatch(save_checks({ checks: checkeds }));
+        // console.log(store.mangas.checks)
+    }
 
     return (
         <main className='flex flex-col items-center min-h-screen bg-[#EBEBEB] '>
@@ -60,7 +65,7 @@ export default function Mangas() {
             </div>
             <div className='bg-[#EBEBEB] lg:bg-white lg:w-[95%] lg:rounded-t-[30px] lg:rounded-b-[30px] lg:-top-[50px] relative -top-[70px] w-full rounded-t-[80px] flex flex-col items-center'>
                 <div className='flex h-[40px] w-[90%] sm:w-[50%] md:w-[40%] xl:w-[30%] justify-between mt-12'>
-                    {categories.map(category => <Category key={category._id} name={category.name} color={category.color} hover={category.hover} value={category._id} action={(e) => { setChecks([e.target.id]) }} />)}
+                    {categories.map(category => <Category key={category._id} name={category.name} color={category.color} hover={category.hover} value={category._id} action={(e) => { actionsChecks(e) }} />)}
                 </div>
                 <div className='grid grid-cols-1 lg:grid-cols-2 w-full md:w-[70%] mt-2 justify-items-center'>
                     {mangas.map((manga) => <Card key={manga._id} title={manga.title} image={manga.cover_photo} type={manga.category_id.name} color={manga.category_id.color} />)}

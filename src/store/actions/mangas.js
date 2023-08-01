@@ -1,10 +1,10 @@
 import { createAction } from "@reduxjs/toolkit";
 
-let saveMangasNews = createAction(
+const saveMangasNews = createAction(
     'saveMangasNews',
-    (obj)=>{
-        return{
-            payload:{
+    (obj) => {
+        return {
+            payload: {
                 mangas_news: obj.mangas_news
             }
         }
@@ -19,11 +19,15 @@ const saveMangaDetail = createAction('saveMangaDetail', obj => {
     return { payload: { manga_detail: obj.manga_detail } }
 })
 
+const save_checks = createAction('save_checks', obj => {
+    return { payload: { checks: obj.checks } }
+})
 
 const mangasActions = {
     saveMangasNews,
     save_title,
-    saveMangaDetail
+    saveMangaDetail,
+    save_checks
 }
 
 export default mangasActions
