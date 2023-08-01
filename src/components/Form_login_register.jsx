@@ -28,7 +28,7 @@ export default function Forms({ dataInpunts, notification, buttonData, page, foo
                     </div> : null
                 }
                 <Button text={buttonData.text} action={buttonData.action} />
-                <button className="z-0 w-[80%] md:w-[50%] border lg:border-2 border-[#1F1F1F]/30 hover:border-[#F97316] hover:bg-neutral-200 rounded-[10px] py-2 flex justify-center items-center gap-1">
+                <button type="button" className="z-0 w-[80%] md:w-[50%] border lg:border-2 border-[#1F1F1F]/30 hover:border-[#F97316] hover:bg-neutral-200 rounded-[10px] py-2 flex justify-center items-center gap-1">
                     <img className="h-4 md:h-6" src={google} alt="G Google" />
                     <span className="opacity-50">Sign in with Google</span>
                 </button>

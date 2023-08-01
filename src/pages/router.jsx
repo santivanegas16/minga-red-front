@@ -90,7 +90,7 @@ const router = createBrowserRouter([
                 }
             },
             {
-                path: '/manga/:manga_id', element: <MangaDetail />, loader: async () => {
+                path: '/manga/:manga_id/:page', element: <MangaDetail />, loader: async () => {
                     let user = JSON.parse(localStorage.getItem("user"))
 
                     user ? user = { role: user.role, online: true } : user = { role: 0, online: false }
