@@ -34,7 +34,7 @@ export default function Chapter() {
     const actionPrev = () => {
         if (count <= 0) {
             setCount(0);
-            navigate(`/chapter/${id}/${count}`);
+            navigate(`/manga/${store.mangas.manga_detail.manga_id}/1`);
         } else {
             setCount(count - 1);
             navigate(`/chapter/${id}/${count - 1}`);
