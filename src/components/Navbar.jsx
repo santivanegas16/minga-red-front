@@ -68,13 +68,15 @@ export default function Navbar() {
                 ]);
             }
         }, [])
-  
+
     const [show, setShow] = useState(false)
     return (
         <>
             {show && <Display options={options} show={show} setShow={setShow} />}
             <nav className="flex justify-between w-full absolute top-0 z-10">
-                <img onClick={() => setShow(!show)} className=" cursor-pointer mt-[21px] ml-[21px] w-14 h-14 lg:mt-[34px] lg:ml-[91px] pl-1.5 rounded-lg hover:bg-white" src={Menu} alt='menu'></img>
+                <svg onClick={() => setShow(!show)} className="cursor-pointer mt-[21px] ml-[21px] w-12 h-12 lg:mt-[34px] lg:ml-[91px] p-1.5 text-orange-500 hover:text-white  bg-[#EBEBEB] hover:bg-orange-500 rounded-lg" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                </svg>
                 <img className="mt-6 mr-9 w-10 h-12 lg:hidden" src={LogoMobile} alt='logo'></img>
                 <img className="mt-[46px] mr-[91px] w-[193px] h-[42px] hidden lg:block" src={logo} alt='logo'></img>
             </nav>
