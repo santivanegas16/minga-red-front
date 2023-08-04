@@ -3,11 +3,12 @@
 Interface for viewing manga and comics
 
 ## MEMBERS:
-Santiago Vanegas Mejia
-Jannus Alejandro Largo Zafra
-Estefania Marin Vallejo
-Juan Mateo Lozano Betancur
-Diana Carolina Hernandez Abahonza
+- Santiago Vanegas Mejia
+- Jannus Alejandro Largo Zafra
+- Estefania Marin Vallejo
+- Juan Mateo Lozano Betancur
+- Diana Carolina Hernandez Abahonza
+
 
 To build the modules required by the app
 ```npm install```
