@@ -20,9 +20,11 @@ export default function Chapter() {
     const [pages, setPages] = useState([]);
     const [next, setNext] = useState("");
     const [count, setCount] = useState(0);
+    const [manga_id, setMnaga_id] = useState("");
 
     useEffect(() => {
         axios(`${apiUrl}chapters/${id}`, header()).then(res => {
+            setMnaga_id(res.data.response.chapter.manga_id);
             setPages(res.data.response.chapter.pages);
             setNext(res.data.response.next);
             dispatch(save_number({ number: res.data.response.chapter.order }))
@@ -34,7 +36,7 @@ export default function Chapter() {
     const actionPrev = () => {
         if (count <= 0) {
             setCount(0);
-            navigate(`/manga/${store.mangas.manga_detail.manga_id}/1`);
+            navigate(`/manga/${manga_id}/1`);
         } else {
             setCount(count - 1);
             navigate(`/chapter/${id}/${count - 1}`);
@@ -50,6 +52,8 @@ export default function Chapter() {
             navigate(`/chapter/${id}/${count + 1}`);
         }
     }
+
+    console.log(store.mangas);
 
     return (
         <main className='bg-[#EBEBEB] w-full min-h-screen'>
