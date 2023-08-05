@@ -36,7 +36,7 @@ export default function MangaDetail() {
 			let headers = { headers: { 'Authorization': `Bearer ${localStorage.getItem("token")}` } }
 			axios(apiUrl + "mangas/" + manga_id, headers)
 				.then(res => {
-					dispatch(saveMangaDetail({ manga_detail: { ...res.data.response.manga, manga_id } }))
+					dispatch(saveMangaDetail({ manga_detail: res.data.response.manga }))
 				})
 				.catch(err => console.log(err))
 		}
