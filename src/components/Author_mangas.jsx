@@ -54,7 +54,7 @@ export default function Author_mangas({ toggle }) {
         <>
             {(allMangas?.length !== 0) ?
                 <div className='flex flex-col items-center '>
-                    <div className="grid max-[400px]:grid-cols-1 grid-cols-2 lg:grid-cols-4 gap-5 w-full md:w-[70%] mt-2 justify-items-center">
+                    <div className="grid max-[400px]:grid-cols-1 grid-cols-2 lg:grid-cols-4 gap-5 w-full md:w-[70%] mt-7 justify-items-center">
                         {allMangas?.map((each, index) => (
                             <div key={index}>
                                 <Anchor to={'/manga/' + each._id +'/1'}>
@@ -68,7 +68,7 @@ export default function Author_mangas({ toggle }) {
                 </div> : ""}
             {(toggle) ?
                 <div className='flex flex-col items-center '>
-                    <div className="grid max-[400px]:grid-cols-1 grid-cols-2 lg:grid-cols-4 gap-5 w-full md:w-[70%] mt-10 justify-items-center ">
+                    <div className="grid max-[400px]:grid-cols-1 grid-cols-2 lg:grid-cols-4 gap-5 w-full md:w-[70%] mt-7 justify-items-center ">
                         {newMangas?.map((each, index) => (
                             <div key={index}>
                                 <Anchor to={'/manga/'+each._id+'/1'}>
@@ -80,7 +80,7 @@ export default function Author_mangas({ toggle }) {
                     </div>
 
                 </div> : <div className='flex flex-col items-center '>
-                    <div className="grid max-[400px]:grid-cols-1 grid-cols-2 lg:grid-cols-4 gap-5 w-full md:w-[70%] mt-10 justify-items-center ">
+                    <div className="grid max-[400px]:grid-cols-1 grid-cols-2 lg:grid-cols-4 gap-5 w-full md:w-[70%] mt-7 justify-items-center ">
                         {oldMangas?.map((each, index) => (
                             <div key={index}>
                                 <Anchor to={'/manga/' + each._id +'/1'}>
