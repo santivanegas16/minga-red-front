@@ -31,31 +31,27 @@ export default function MangaDetail() {
 		navigate(`/manga/${manga_id}/${page}`);
 	}
 
-	useEffect(
-		() => {
-			if (manga_id !== store.mangas.manga_detail.manga_id) {
-				let headers = { headers: { 'Authorization': `Bearer ${localStorage.getItem("token")}` } }
-				axios(apiUrl + "mangas/" + manga_id, headers)
-					.then(res => {
-						dispatch(saveMangaDetail({ manga_detail: { ...res.data.response.manga, manga_id } }))
-					})
-					.catch(err => console.log(err))
-			}
-		}, []
-	)
-
-	useEffect(
-		() => {
+	useEffect(() => {
+		if (manga_id !== store.mangas.manga_detail.manga_id) {
 			let headers = { headers: { 'Authorization': `Bearer ${localStorage.getItem("token")}` } }
-			axios(apiUrl + "chapters/?manga_id=" + manga_id + "&page=" + page, headers)
+			axios(apiUrl + "mangas/" + manga_id, headers)
 				.then(res => {
-					setChapters(res.data.response.chapters)
-					setNext(res.data.response.next);
-					setPrev(res.data.response.prev);
+					dispatch(saveMangaDetail({ manga_detail: { ...res.data.response.manga, manga_id } }))
 				})
 				.catch(err => console.log(err))
-		}, [page]
-	)
+		}
+	}, [])
+
+	useEffect(() => {
+		let headers = { headers: { 'Authorization': `Bearer ${localStorage.getItem("token")}` } }
+		axios(apiUrl + "chapters/?manga_id=" + manga_id + "&page=" + page, headers)
+			.then(res => {
+				setChapters(res.data.response.chapters)
+				setNext(res.data.response.next);
+				setPrev(res.data.response.prev);
+			})
+			.catch(err => console.log(err))
+	}, [page])
 
 	return (
 		<main>
