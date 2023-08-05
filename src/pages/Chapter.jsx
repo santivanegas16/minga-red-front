@@ -52,22 +52,28 @@ export default function Chapter() {
     }
 
     return (
-        <main className='bg-[#EBEBEB]'>
-            <div className="flex justify-center items-center w-full pt-[50px] pb-0 lg:pb-[50px]">
-                <h1 className="font-roboto font-normal text-[15px] leading-[17.58px] text-black"> {store.chapters?.number} - {store.chapters?.text} </h1>
+        <main className='bg-[#EBEBEB] w-full min-h-screen'>
+            <div className="flex justify-center items-center lg:bg-gradient-to-r lg:from-[#FF5722] lg:to-[#ff8e3d] bg-gradient-to-r from-[#FF5722] to-[#FF5722] w-full h-[90px] lg:h-[110px]">
+                <h1 className="font-roboto font-normal text-[15px] leading-[17.58px] text-white"> {store.chapters?.number} - {store.chapters?.text} </h1>
             </div>
-            <div className='flex justify-center items-center px-5 min-h-screen pb-5'>
-                <div className="w-[430px] lg:w-[600px] h-[789px] bg-center bg-no-repeat bg-contain flex" style={{ backgroundImage: `url(${pages[count]})` }}>
-                    <button onClick={() => actionPrev()}
-                        className='w-[50%] flex items-center justify-start pl-5 hover:opacity-50'>
-                        <img src={prevImg} alt="Prev" />
-                    </button>
-                    <button onClick={() => actionNext()}
-                        className='w-[50%] flex items-center justify-end pr-5'>
-                        <img src={nextImg} alt="Next" />
-                    </button>
+
+            <div className='flex justify-center items-center py-5'>
+                <div className="w-[430px] lg:w-[600px] h-[789px] bg-center bg-no-repeat bg-contain relative" style={{ backgroundImage: `url(${pages[count]})` }}>
+                    <div className='w-[50%] h-[100%] absolute '>
+                        <button onClick={() => actionPrev()}
+                            className='w-full h-full flex items-center justify-start hover:opacity-50'>
+                            <img src={prevImg} alt="Prev" />
+                        </button>
+                    </div>
+                    <div className='w-[50%] h-[100%] absolute right-0'>
+                        <button onClick={() => actionNext()}
+                            className='w-full h-full left-0 flex items-center justify-end hover:opacity-50'>
+                            <img src={nextImg} alt="Next" />
+                        </button>
+                    </div>
                 </div>
             </div>
+
             <div className='flex justify-center items-center pb-5'>
                 <img src={comment} alt="Comment" />
                 <p>42</p>

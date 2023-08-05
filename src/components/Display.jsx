@@ -12,7 +12,8 @@ export default function Display({ options, show, setShow }) {
                     <p className='text-sm font-medium'> {connected?.email} </p>
                 </div>
             </div>
-            <div onClick={() => setShow(!show)} className="cursor-pointer absolute  right-[29px] top-[40px]"><img src={Close} alt='close' /></div>
+
+            <div onClick={() => setShow(!show)} className="cursor-pointer absolute hover:bg-orange-700 p-1.5 rounded-full right-[29px] top-[40px]"><img src={Close} alt='close' /></div>
             <div className="absolute top-[85px] w-full lg:w-[430px] flex flex-col items-center">
                 {options?.map((each, index) =>
                     <Anchor onClick={each.onClick} key={index} to={each.to} className='text-white text-center font-poppins text-[15px] font-semibold leading-6 mt-[10px] w-[382px] rounded-lg cursor-pointer py-3 hover:bg-white hover:text-orange-500'>{each.title}</Anchor>
