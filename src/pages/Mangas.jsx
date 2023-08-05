@@ -68,12 +68,13 @@ export default function Mangas() {
 
     return (
         <main className='flex flex-col items-center min-h-screen bg-[#EBEBEB] '>
-            <div className='w-full h-[369px] bg-cover bg-center flex flex-col items-center justify-center' style={{ backgroundImage: `url(${Bg_mangas})` }}>
-                <h1 className='w-[168px] h-[38px] font-poppins font-bold text-[40px] leading-[38.07px] m-10 text-white'> Mangas </h1>
-                <div className='flex items-center max-[380px]:w-[360px] w-[393px] rounded-[80px] bg-black'>
-                    <span className='absolute w-[37px] h-[37px] m-5 max-[380px]:hidden'> <img src={Search} alt="Search" /> </span>
+            <div className='w-full h-[369px] lg:h-[500px] bg-cover bg-center flex flex-col items-center justify-center' style={{ backgroundImage: `url(${Bg_mangas})` }}>
+                <div className='absolute w-full h-full bg-black opacity-30 inset-0 lg:hidden'></div>
+                <h1 className='z-10 w-[168px] h-[38px] font-poppins font-bold text-[40px] leading-[38.07px] m-10 text-white'> Mangas </h1>
+                <div className='z-10 flex items-center max-[380px]:w-[360px] w-[393px] lg:w-[900px] rounded-[80px] lg:rounded-[10px] bg-white'>
+                    <span className='absolute lg:relative w-[37px] h-[37px] m-2 max-[380px]:hidden'> <img className='lg:w-full lg:h-full' src={Search} alt="Search" /> </span>
                     <input onChange={(e) => dispatch(save_title({ title: e.target.value }))} defaultValue={store.mangas.text}
-                        className='font-poppins font-normal text-[24px] leading-[22.84px] p-[10px] text-center w-full rounded-[80px] border-2 hover:border-[#F97316]'
+                        className='lg:font-roboto border-none font-poppins font-normal text-[24px] leading-[22.84px] p-[10px] text-center lg:text-start w-full rounded-[80px] lg:rounded-[10px] border-2 hover:border-[#F97316] lg:outline-0'
                         type="text"
                         placeholder='Find your manga here' />
                 </div>

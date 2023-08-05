@@ -29,7 +29,7 @@ export default function Chapter() {
             dispatch(saveTitle({ title: res.data.response.chapter.title }))
             if (page >= 0) { setCount(parseInt(page)) };
         }).catch(error => console.log(error));
-    }, [])
+    }, [id])
 
     const actionPrev = () => {
         if (count <= 0) {
@@ -44,7 +44,7 @@ export default function Chapter() {
     const actionNext = () => {
         if (count >= pages.length - 1) {
             setCount(0);
-            window.location.replace(`/chapter/${next}/0`);
+            navigate(`/chapter/${next}/0`);
         } else {
             setCount(count + 1);
             navigate(`/chapter/${id}/${count + 1}`);
