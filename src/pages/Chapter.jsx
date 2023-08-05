@@ -53,8 +53,6 @@ export default function Chapter() {
         }
     }
 
-    console.log(store.mangas);
-
     return (
         <main className='bg-[#EBEBEB] w-full min-h-screen'>
             <div className="flex justify-center items-center lg:bg-gradient-to-r lg:from-[#FF5722] lg:to-[#ff8e3d] bg-gradient-to-r from-[#FF5722] to-[#FF5722] w-full h-[90px] lg:h-[110px]">
