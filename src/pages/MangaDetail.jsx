@@ -62,7 +62,7 @@ export default function MangaDetail() {
 			<div className="min-h-screen w-full pt-[100px] bg-[#EBEBEB] pb-[30px] flex flex-col items-center">
 				<div className="flex flex-col items-center">
 					<div className='px-5 md:flex md:flex-col md:items-center'>
-						<img className="h-[388px] w-[396px] object-cover" src={Manga?.cover_photo} />
+						<img className="h-[388px] w-[396px] object-cover rounded-lg" src={Manga?.cover_photo} />
 						{toggle ?
 							<h1 className="max-[350px]:text-[30px] text-[40px] font-normal w-min md:w-full font-poppins text-justify sm:text-center leading-none pt-2">{Manga?.title}</h1>
 							:
