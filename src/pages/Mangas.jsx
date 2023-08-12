@@ -16,7 +16,7 @@ export default function Mangas() {
 
     const inputsChecked = useRef();
 
-    const store = useSelector(store => store)
+    const mangasStore = useSelector(store => store.mangas)
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -35,7 +35,7 @@ export default function Mangas() {
     }, [])
 
     useEffect(() => {
-        axios.get(apiUrl + `mangas?title=${store.mangas.text}&page=1&category=${store.mangas.checks.join(',')}`, Headers()).then(res => {
+        axios.get(apiUrl + `mangas?title=${mangasStore.text}&page=1&category=${mangasStore.checks.join(',')}`, Headers()).then(res => {
             setMangas(res.data.response.mangas);
             setNext(res.data.response.next);
             setPrev(res.data.response.prev);
@@ -46,10 +46,10 @@ export default function Mangas() {
             setNext(null);
             setPrev(null);
         });
-    }, [store.mangas.text, store.mangas.checks])
+    }, [mangasStore.text, mangasStore.checks])
 
     useEffect(() => {
-        axios.get(apiUrl + `mangas?title=${store.mangas.text}&page=${page}&category=${store.mangas.checks.join(',')}`, Headers()).then(res => {
+        axios.get(apiUrl + `mangas?title=${mangasStore.text}&page=${page}&category=${mangasStore.checks.join(',')}`, Headers()).then(res => {
             setMangas(res.data.response.mangas);
             setNext(res.data.response.next);
             setPrev(res.data.response.prev);
@@ -73,7 +73,7 @@ export default function Mangas() {
                 <h1 className='z-10 w-[168px] h-[38px] font-poppins font-bold text-[40px] leading-[38.07px] m-10 text-white'> Mangas </h1>
                 <div className='z-10 flex items-center max-[380px]:w-[360px] w-[393px] lg:w-[900px] rounded-[80px] lg:rounded-[10px] bg-white'>
                     <span className='absolute lg:relative w-[37px] h-[37px] m-2 max-[380px]:hidden'> <img className='lg:w-full lg:h-full' src={Search} alt="Search" /> </span>
-                    <input onChange={(e) => dispatch(save_title({ title: e.target.value }))} defaultValue={store.mangas.text}
+                    <input onChange={(e) => dispatch(save_title({ title: e.target.value }))} defaultValue={mangasStore.text}
                         className='lg:font-roboto border-none font-poppins font-normal text-[24px] leading-[22.84px] p-[10px] text-center lg:text-start w-full rounded-[80px] lg:rounded-[10px] border-2 hover:border-[#F97316] lg:outline-0'
                         type="text"
                         placeholder='Find your manga here' />
@@ -82,7 +82,7 @@ export default function Mangas() {
             <div className='bg-[#EBEBEB] lg:bg-white lg:w-[95%] lg:rounded-t-[30px] lg:rounded-b-[30px] lg:-top-[50px] relative -top-[70px] w-full rounded-t-[80px] flex flex-col items-center'>
                 <form ref={inputsChecked} className='flex h-[40px] w-[90%] sm:w-[50%] md:w-[40%] xl:w-[30%] justify-between mt-12'>
                     <input key={0} className="bg-[#cacaca] cursor-pointer w-[75px] h-[35px] rounded-[50px] text-white font-poppins font-medium text-[12px] leading-[11.42px] text-center hidden lg:block hover:bg-[#999999]" type='button' value="All" onClick={() => dispatch(save_checks({ checks: [] }))} />
-                    {categories.map(category => <Category key={category._id} name={category.name} color={category.color} hover={category.hover} value={category._id} action={() => { actionsChecks() }} isChecked={store.mangas.checks.includes(category._id)} />)}
+                    {categories.map(category => <Category key={category._id} name={category.name} color={category.color} hover={category.hover} value={category._id} action={() => { actionsChecks() }} isChecked={mangasStore.checks.includes(category._id)} />)}
                 </form>
                 {(mangas.length !== 0) ?
                     <div className='grid grid-cols-1 lg:grid-cols-2 w-full md:w-[70%] mt-2 justify-items-center'>

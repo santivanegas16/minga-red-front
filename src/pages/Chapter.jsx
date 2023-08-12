@@ -8,11 +8,15 @@ import apiUrl from '../apiUrl';
 import header from '../header';
 import { useDispatch, useSelector } from 'react-redux';
 import chapter_actions from '../store/actions/chapters';
+import Comments from '../components/Comments';
+
 let { saveTitle, save_number } = chapter_actions;
 
 export default function Chapter() {
 
-    const store = useSelector(store => store);
+    const chapters = useSelector(store => store.chapters)
+    const numberComments = useSelector(store => store.comments.allComments)
+    console.log(numberComments)
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -21,6 +25,8 @@ export default function Chapter() {
     const [next, setNext] = useState("");
     const [count, setCount] = useState(0);
     const [manga_id, setMnaga_id] = useState("");
+
+
 
     useEffect(() => {
         axios(`${apiUrl}chapters/${id}`, header()).then(res => {
@@ -56,7 +62,7 @@ export default function Chapter() {
     return (
         <main className='bg-[#EBEBEB] w-full min-h-screen'>
             <div className="flex justify-center items-center lg:bg-gradient-to-r lg:from-[#FF5722] lg:to-[#ff8e3d] bg-gradient-to-r from-[#FF5722] to-[#FF5722] w-full h-[90px] lg:h-[110px]">
-                <h1 className="font-roboto font-normal text-[15px] leading-[17.58px] text-white"> {store.chapters?.number} - {store.chapters?.text} </h1>
+                <h1 className="font-roboto font-normal text-[15px] leading-[17.58px] text-white"> {chapters?.number} - {chapters?.text} </h1>
             </div>
 
             <div className='flex justify-center items-center py-5'>
@@ -75,11 +81,14 @@ export default function Chapter() {
                     </div>
                 </div>
             </div>
-
-            <div className='flex justify-center items-center pb-5'>
-                <img src={comment} alt="Comment" />
-                <p>42</p>
+            {numberComments !== null &&
+                <div className='flex justify-center items-center pb-5'>
+                <img className='cursor-pointer pr-2' src={comment} alt="Comment" />
+                <p className='font-roboto text-[20px] font-normal'>{numberComments}</p>
             </div>
+            }
+            
+            <Comments />
         </main>
     )
 }

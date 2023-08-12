@@ -17,8 +17,8 @@ export default function MangaDetail() {
 
 	const dispatch = useDispatch()
 	const navigate = useNavigate();
-	const store = useSelector(store => store)
-	const Manga = store.mangas.manga_detail
+	const mangas = useSelector(store => store.mangas)
+	const Manga = mangas.manga_detail
 
 	const { manga_id, page } = useParams()
 
@@ -32,7 +32,7 @@ export default function MangaDetail() {
 	}
 
 	useEffect(() => {
-		if (manga_id !== store.mangas.manga_detail.manga_id) {
+		if (manga_id !== Manga.manga_id) {
 			let headers = { headers: { 'Authorization': `Bearer ${localStorage.getItem("token")}` } }
 			axios(apiUrl + "mangas/" + manga_id, headers)
 				.then(res => {
