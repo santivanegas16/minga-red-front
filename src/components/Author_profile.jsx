@@ -12,20 +12,15 @@ const { saveProfile } = authorActions
 
 export default function Author_profile() {
 
-    // const [author, setauthor] = useState({}) // no necesito un estado local porque voy a guardar los datos globalmente
     const dispatch = useDispatch()
-    const store = useSelector(store => store)
-    const profile = store.authors.profile
+    const authors = useSelector(store => store.authors)
+    const profile = authors.profile
     useEffect(
         () => {
             if (!profile?.name) { // si y solo si no existen los datos del author en el store de redux realizo la peticion correspondiente para obtener los datos
                 let headers = { headers: { 'Authorization': `Bearer ${localStorage.getItem("token")}` } }
                 axios(apiUrl + "authors/me", headers)
                     .then(res => {
-                        // setauthor(res.data.response.profile)
-                        //Setiamos variable de estado local
-                        //debemos setiar correctamente la variable de estado global correspondiente
-                        //despacho la accion correspondiente para cargar esos datos en el store de redux
                         dispatch(saveProfile({
                             profile: res.data.response.profile
                         }))

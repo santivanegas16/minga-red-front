@@ -11,11 +11,11 @@ const { saveMangasNews } = mangasActions
 export default function Author_mangas({ toggle }) {
 
     const dispatch = useDispatch()
-    const store = useSelector(store => store)
-    const logoMangas = store.mangas.logo
-    const allMangas = store.mangas.all
-    const newMangas = store.mangas.new
-    const oldMangas = store.mangas.old
+    const mangas = useSelector(store => store.mangas)
+    const logoMangas = mangas.logo
+    const allMangas = mangas.all
+    const newMangas = mangas.new
+    const oldMangas = mangas.old
 
     useEffect(
         () => {
