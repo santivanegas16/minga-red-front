@@ -30,6 +30,7 @@ export default function Navbar() {
                 if (user.role === 0) {
                     setOptions([
                         { to: '/', title: "Home" },
+                        { to: '/new-role', title: "New Role" },
                         { to: '/mangas/1', title: "Mangas" },
                         { to: '/author-form', title: "New Author" },
                         { to: '/cia-form', title: "New Company" },

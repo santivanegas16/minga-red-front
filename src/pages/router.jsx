@@ -13,6 +13,7 @@ import Author from "./Author";
 import MangaDetail from "./MangaDetail";
 import Chapter from "./Chapter";
 import MyMangas from "./MyMangas";
+import New_role from "./New_role";
 
 const router = createBrowserRouter([
     //necesita que pasemos un array de objetos
@@ -118,6 +119,15 @@ const router = createBrowserRouter([
                 }
             },
             { path: '/not-allowed', element: <NotAllowed /> },
+            {
+                path: '/new-role', element: <New_role />, loader: async () => {
+                    let user = JSON.parse(localStorage.getItem('user'));
+
+                    user ? user = { role: user.role, online: true } : user = { role: 0, online: false }
+
+                    return (user.role != 0) && redirect("/not-allowed")
+                }
+            },
         ]
     }
 ])
