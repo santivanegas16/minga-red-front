@@ -32,8 +32,6 @@ export default function Navbar() {
                         { to: '/', title: "Home" },
                         { to: '/new-role', title: "New Role" },
                         { to: '/mangas/1', title: "Mangas" },
-                        { to: '/author-form', title: "New Author" },
-                        { to: '/cia-form', title: "New Company" },
                         { to: '/', title: "Sign Out", onClick: signout },
                     ]);
                 } else if (user.role === 2) {
