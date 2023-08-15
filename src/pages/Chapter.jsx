@@ -8,15 +8,17 @@ import apiUrl from '../apiUrl';
 import header from '../header';
 import { useDispatch, useSelector } from 'react-redux';
 import chapter_actions from '../store/actions/chapters';
-import Comments from '../components/Comments';
+import commentsActions from "../store/actions/comments"
+import Modal_comments from '../components/Modal_comments';
 
 let { saveTitle, save_number } = chapter_actions;
+const { readComments } = commentsActions
 
 export default function Chapter() {
 
     const chapters = useSelector(store => store.chapters)
     const numberComments = useSelector(store => store.comments.allComments)
-    console.log(numberComments)
+
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -26,7 +28,11 @@ export default function Chapter() {
     const [count, setCount] = useState(0);
     const [manga_id, setMnaga_id] = useState("");
 
-
+    useEffect(
+        () => {
+            dispatch(readComments(id))
+        }, []
+    )
 
     useEffect(() => {
         axios(`${apiUrl}chapters/${id}`, header()).then(res => {
@@ -59,6 +65,8 @@ export default function Chapter() {
         }
     }
 
+    const [show, setShow] = useState(false)
+
     return (
         <main className='bg-[#EBEBEB] w-full min-h-screen'>
             <div className="flex justify-center items-center lg:bg-gradient-to-r lg:from-[#FF5722] lg:to-[#ff8e3d] bg-gradient-to-r from-[#FF5722] to-[#FF5722] w-full h-[90px] lg:h-[110px]">
@@ -81,14 +89,16 @@ export default function Chapter() {
                     </div>
                 </div>
             </div>
+            
             {numberComments !== null &&
-                <div className='flex justify-center items-center pb-5'>
-                <img className='cursor-pointer pr-2' src={comment} alt="Comment" />
+                <div onClick={() => setShow(!show)} className='flex cursor-pointer justify-center items-center pb-5'>
+                <img className='pr-2' src={comment} alt="Comment" />
                 <p className='font-roboto text-[20px] font-normal'>{numberComments}</p>
             </div>
             }
             
-            <Comments />
+            {show && <Modal_comments show={show} setShow={setShow} />}
+    
         </main>
     )
 }
