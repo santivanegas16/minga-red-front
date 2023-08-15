@@ -69,7 +69,7 @@ export default function Mangas() {
     return (
         <main className='flex flex-col items-center min-h-screen bg-[#EBEBEB] '>
             <div className='w-full h-[369px] lg:h-[500px] bg-cover bg-center flex flex-col items-center justify-center' style={{ backgroundImage: `url(${Bg_mangas})` }}>
-                <div className='absolute w-full h-full bg-black opacity-30 inset-0 lg:hidden'></div>
+                <div className='absolute w-full h-[369px] bg-black opacity-30 inset-0 lg:hidden'></div>
                 <h1 className='z-10 w-[168px] h-[38px] font-poppins font-bold text-[40px] leading-[38.07px] m-10 text-white'> Mangas </h1>
                 <div className='z-10 flex items-center max-[380px]:w-[360px] w-[393px] lg:w-[900px] rounded-[80px] lg:rounded-[10px] bg-white'>
                     <span className='absolute lg:relative w-[37px] h-[37px] m-2 max-[380px]:hidden'> <img className='lg:w-full lg:h-full' src={Search} alt="Search" /> </span>

@@ -38,7 +38,7 @@ export default function Navbar() {
                     setOptions([
                         { to: '/', title: "Home" },
                         { to: '/mangas/1', title: "Mangas" },
-                        { to: '/mymangas', title: "My Mangas" },
+                        { to: '/mymangas/1', title: "My Mangas" },
                         { to: '/manga-form', title: "New Manga" },
                         { to: '/:manga_id/chapther-form', title: "New Chapter" },
                         { to: '/', title: "Sign Out", onClick: signout },
@@ -53,7 +53,7 @@ export default function Navbar() {
                     setOptions([
                         { to: '/', title: "Home" },
                         { to: '/mangas/1', title: "Mangas" },
-                        { to: '/mymangas', title: "My Mangas" },
+                        { to: '/mymangas/1', title: "My Mangas" },
                         { to: '/manga-form', title: "New Manga" },
                         { to: '/:manga_id/chapther-form', title: "New Chapter" },
                         { to: '/me', title: "Profile" },
