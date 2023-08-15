@@ -33,8 +33,8 @@ export default function New_role() {
               <div className="flex w-full">
                 <img src={authorRole} alt="" className="w-[103px] h-[45px]" />
                 <div className="flex flex-col ms-[4%] ">
-                  <p className="font-bold text-[20]">Join as an Author!</p>
-                  <p>I'm a reader writting a manga</p>
+                  <p className="font-bold text-[20] text-[#FF5722]">Join as an Author!</p>
+                  <p className="text-[#FF5722]">I'm a reader writting a manga</p>
                 </div>
               </div>
 
@@ -55,8 +55,8 @@ export default function New_role() {
               <div className="flex w-full">
                 <img src={companyRole} alt="" className="w-[103px] h-[45px]" />
                 <div className="flex flex-col ms-[4%] ">
-                  <p className="font-bold text-[20]">Join as a Company!</p>
-                  <p>I'm a company and I want to publish my comics</p>
+                  <p className="font-bold text-[20] text-[#FF5722]">Join as a Company!</p>
+                  <p className="text-[#FF5722]">I'm a company and I want to publish my comics</p>
                 </div>
               </div>
 
