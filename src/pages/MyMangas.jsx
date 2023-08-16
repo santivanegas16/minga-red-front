@@ -8,15 +8,13 @@ import Card from '../components/Card_manga';
 import Category from '../components/Category_mangas';
 import { useSelector, useDispatch } from 'react-redux';
 import mangasActions from '../store/actions/mangas';
-const { save_checks,save_myChecks } = mangasActions;
+const { save_myChecks } = mangasActions;
 
 export default function MyMangas() {
-
 
     const inputsChecked = useRef();
 
     const mangasStore = useSelector(store => store.mangas)
-    console.log(mangasStore)
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -26,8 +24,15 @@ export default function MyMangas() {
     const [categories, setCategories] = useState([]);
     const { page } = useParams();
 
+    console.log(page)
+
     const actionNextOrPrev = (numberPage) => {
         navigate(`/mymangas/${numberPage}`);
+    }
+
+    const actionsChecks = () => {
+        let myChecks = Object.values(inputsChecked.current).filter(each => each.checked).map(each => each.id);
+        dispatch(save_myChecks({ myChecks }));
     }
 
     useEffect(() => {
@@ -35,21 +40,7 @@ export default function MyMangas() {
     }, [])
 
     useEffect(() => {
-        axios.get(apiUrl + `mangas/me?page=1&category=${mangasStore.myChecks.join(',')}`, Headers()).then(res => {
-            console.log(res)
-            setMangas(res.data.response.mangas);
-            actionNextOrPrev(1);
-        }).catch(error => {
-            console.log(error)
-            setMangas([])
-            setNext(null);
-            setPrev(null);
-        });
-    }, [mangasStore.myChecks])
-
-    useEffect(() => {
         axios.get(apiUrl + `mangas/me?page=${page}&category=${mangasStore.myChecks.join(',')}`, Headers()).then(res => {
-            // console.log(res)
             setMangas(res.data.response.mangas);
             setNext(res.data.response.next);
             setPrev(res.data.response.prev);
@@ -59,14 +50,7 @@ export default function MyMangas() {
             setNext(null);
             setPrev(null);
         });
-    }, [page])
-
-    const actionsChecks = () => {
-        let Checks = Object.values(inputsChecked.current).filter(each => each.checked).map(each => each.id);
-        dispatch(save_myChecks({ Checks }));
-    }
-
-    // console.log(mangas)
+    }, [page, mangasStore.myChecks])
 
     return (
         <main className='flex flex-col items-center min-h-screen bg-[#EBEBEB] '>
@@ -76,7 +60,7 @@ export default function MyMangas() {
             </div>
             <div className='bg-[#EBEBEB] lg:bg-white lg:w-[95%] lg:rounded-t-[30px] lg:rounded-b-[30px] lg:-top-[50px] relative -top-[70px] w-full rounded-t-[80px] flex flex-col items-center'>
                 <form ref={inputsChecked} className='flex h-[40px] w-[90%] sm:w-[50%] md:w-[40%] xl:w-[30%] justify-between mt-12'>
-                    <input key={0} className="bg-[#cacaca] cursor-pointer w-[75px] h-[35px] rounded-[50px] text-white font-poppins font-medium text-[12px] leading-[11.42px] text-center hidden lg:block hover:bg-[#999999]" type='button' value="All" onClick={() => dispatch(save_checks({ myChecks: [] }))} />
+                    <input key={0} className="bg-[#cacaca] cursor-pointer w-[75px] h-[35px] rounded-[50px] text-white font-poppins font-medium text-[12px] leading-[11.42px] text-center hidden lg:block hover:bg-[#999999]" type='button' value="All" onClick={() => dispatch(save_myChecks({ myChecks: [] }))} />
                     {categories.map(category => <Category key={category._id} name={category.name} color={category.color} hover={category.hover} value={category._id} action={() => { actionsChecks() }} isChecked={mangasStore.myChecks.includes(category._id)} />)}
                 </form>
                 {(mangas.length !== 0) ?
