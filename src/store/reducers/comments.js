@@ -1,7 +1,7 @@
 import { createReducer } from "@reduxjs/toolkit";
 import commentsActions from "../actions/comments";
 
-const {readComments, destroyComment, updateComment} = commentsActions
+const {readComments, destroyComment, updateComment, createComment} = commentsActions
 
 const initialState = {
     comments: [], //comments es un array de objetos con 4 ids
@@ -21,6 +21,16 @@ const commentsReducer = createReducer(
                 next : action.payload.next,
                 prev : action.payload.prev,
                 allComments : action.payload.allComments
+            }
+            return newState
+        }
+    )
+    .addCase(
+        createComment.fulfilled,
+        (state,action) => {
+            let newState = {
+                ...state,
+                comments: [action.payload, ...state.comments]
             }
             return newState
         }
@@ -51,6 +61,7 @@ const commentsReducer = createReducer(
             return newState
         }
     )
+    
 )
 
 export default commentsReducer
