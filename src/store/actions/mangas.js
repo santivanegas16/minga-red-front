@@ -1,4 +1,7 @@
-import { createAction } from "@reduxjs/toolkit";
+import { createAction, createAsyncThunk } from "@reduxjs/toolkit";
+import apiUrl from "../../apiUrl";
+import header from "../../header";
+import axios from "axios";
 
 const saveMangasNews = createAction(
     'saveMangasNews',
@@ -27,7 +30,25 @@ const save_myChecks = createAction('myChecks', obj => {
     return { payload: { myChecks: obj.myChecks } }
 })
 
+const readManga = createAsyncThunk(
+    'readManga', async (obj) => {
+        try {
+            let myMangas = await axios(apiUrl + 'mangas/me', header())
+            // console.log(myMangas.data.response);
+
+            return {
+                myMangas: myMangas.data.response
+            }
+        } catch (error) {
+            console.log(error)
+            return{
+                mangas:[],
+            }
+        }
+    }
+)
 const mangasActions = {
+    readManga,
     saveMangasNews,
     save_title,
     saveMangaDetail,

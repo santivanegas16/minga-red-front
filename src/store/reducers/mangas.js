@@ -1,7 +1,7 @@
 import { createReducer } from "@reduxjs/toolkit";
 import mangasActions from "../actions/mangas";
 
-const { saveMangasNews, save_title, saveMangaDetail, save_checks, save_myChecks } = mangasActions
+const { readManga, saveMangasNews, save_title, saveMangaDetail, save_checks, save_myChecks } = mangasActions
 
 const initialState = {
     new: [],
@@ -11,12 +11,20 @@ const initialState = {
     logo: "",
     text: "",
     manga_detail: {},
-    myChecks : []
+    myChecks: [],
+    myMangas:[],
 }
 
 const mangaReducer = createReducer(
     initialState,
-    (builder) => builder.addCase(saveMangasNews, (state, action) => {
+    (builder) => builder.addCase(
+        readManga.fulfilled, (state, action) => {
+            const newState = {
+                ...state,
+                myMangas: action.payload.myMangas
+            }
+            return newState
+        }).addCase(saveMangasNews, (state, action) => {
         const newState = {
             ...state,
             new: action.payload.mangas_news?.new,
