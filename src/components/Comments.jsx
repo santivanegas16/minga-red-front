@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from "react-redux"
 import commentsActions from "../store/actions/comments"
-import { useEffect, useRef } from "react"
+import { useEffect, useRef, useState } from "react"
 import { useParams } from "react-router-dom";
 import Comment from "./Comment";
 
@@ -10,7 +10,8 @@ export default function Comments() {
     const { id } = useParams()
     const dispatch = useDispatch()
     const inputComment = useRef()
-    const storeComments = useSelector(store => store.comments) 
+    const [reload, setReload] = useState(false)
+    // const storeComments = useSelector(store => store.comments) 
     const comments = useSelector(store => store.comments.comments)
     const next = useSelector(store => store.comments.next)
     const prev = useSelector(store => store.comments.prev)
@@ -18,10 +19,11 @@ export default function Comments() {
     useEffect(
         () => {
             dispatch(readComments(id))
-        }, [storeComments] //se agrega storeComments para que actualice y no salga el error del usuario REVISAR
+        }, [reload] //se agrega storeComments para que actualice y no salga el error del usuario REVISAR
     )
 
     const sendComment = () => {
+        setReload(!reload)
         let dataComment = {
             description: inputComment.current?.value.trim(),
             chapter_id: id
@@ -31,7 +33,7 @@ export default function Comments() {
 
     return (
         <div className="pt-[50px]">
-            {comments.map(each => <Comment each={each} key={each._id}/>)}
+            {comments.map(each => <Comment each={each} key={each._id} reload={reload} setReload={setReload} />)}
             <div className="flex justify-center items-center">
                 {prev && <button className='bg-gradient-to-r from-[#FF5722] to-[#F97316] text-white rounded-full m-5 w-[100px] h-[40px] transition hover:scale-110' value={prev}>Prev</button>}
                 {next && <button className='bg-gradient-to-r from-[#FF5722] to-[#F97316] text-white rounded-full m-5 w-[100px] h-[40px] transition hover:scale-110' value={next}>Next</button>}

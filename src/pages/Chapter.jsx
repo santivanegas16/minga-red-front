@@ -89,16 +89,23 @@ export default function Chapter() {
                     </div>
                 </div>
             </div>
-            
-            {numberComments !== null &&
+
+            {numberComments !== null ? (
                 <div onClick={() => setShow(!show)} className='flex cursor-pointer justify-center items-center pb-5'>
-                <img className='pr-2' src={comment} alt="Comment" />
-                <p className='font-roboto text-[20px] font-normal'>{numberComments}</p>
-            </div>
+                    <img className='pr-2' src={comment} alt="Comment" />
+                    <p className='font-roboto text-[20px] font-normal'>{numberComments}</p>
+                </div>
+            ) : (
+                <div onClick={() => setShow(!show)} className='flex cursor-pointer justify-center items-center pb-5'>
+                    <img className='pr-2' src={comment} alt="Comment" />
+                    <p className='font-roboto text-[20px] font-normal'>New comment</p>
+                </div>
+            )
+
             }
-            
+
             {show && <Modal_comments show={show} setShow={setShow} />}
-    
+
         </main>
     )
 }
