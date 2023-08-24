@@ -1,30 +1,36 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
-import apiUrl from "../apiUrl";
 import { useParams, useNavigate } from 'react-router-dom';
 import ButtonEdit from '../components/ButtonEdit';
 import ButtonDelete from '../components/ButtonDelete'
 import bg_register from '../../public/img/image4.png';
+import chapter_actions from "../store/actions/chapters";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function EditChapter() {
 
-    const { manga_id } = useParams()
-    console.log(manga_id)
+	const {saveChapters} = chapter_actions
+	const dispatch = useDispatch()
+	const chapters = useSelector(store=>store.chapters.chapters)
+	console.log(chapters)
+	const title = useSelector(store=>store.chapters.title)
+	const order = useSelector(store=>store.chapters.order)
+	const coverphoto = useSelector(store=>store.chapters.cover_photo)
 
-	// let [categories, setCateogries] = useState([]);
-	// useEffect(
-	// 	() => {
-    //         let headers = { headers: { 'Authorization': `Bearer ${localStorage.getItem("token")}` } }
-	// 		axios(apiUrl + "edit/" + manga_id, headers)
-	// 			.then((res) => {
-	// 				// console.log(res)  //se utiliza para saber donde esta la informacion que necesito
-	// 				setCateogries(res.data.response); //setiamos la informacion en una variable de estado
-	// 			})
-	// 			.catch((err) => console.log(err));
-	// 	},
-	// 	[] // si el array esta vacio el efecto se ejecuta por primera y unica vez cuando el componente se monta
-	// 	//si el array tiene algunas variables el efecto se ejecuta cada vez que se modifica el valor de los parametros
-	// );
+    const { manga_id } = useParams()
+    // console.log(manga_id)
+
+	// let [chapters, setchapters] = useState([]);
+	useEffect(
+		() => {
+            
+			dispatch(saveChapters({manga_id}))
+			
+		},
+		[] // si el array esta vacio el efecto se ejecuta por primera y unica vez cuando el componente se monta
+		//si el array tiene algunas variables el efecto se ejecuta cada vez que se modifica el valor de los parametros
+	);
+
+
 
     return (
         <main className="flex min-h-screen w-full pt-[30px] pb-[30px]">
@@ -72,7 +78,8 @@ export default function EditChapter() {
                 </form>
             </div>
             <div className="hidden lg:flex items-center justify-center w-1/2 p-4 min-h-screen max-h-screen">
-                <img className="w-4/5 h-auto" src={bg_register} alt="Register" />
+				<p>{order} {title}</p>
+                <img className="w-4/5 h-auto" src={coverphoto} alt="Register" />
             </div>
 
         </main>

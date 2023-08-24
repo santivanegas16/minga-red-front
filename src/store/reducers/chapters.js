@@ -1,11 +1,15 @@
 import { createReducer } from "@reduxjs/toolkit";
 import chapter_actions from "../actions/chapters";
 
-const { saveTitle, save_number } = chapter_actions;
+const { saveTitle, save_number, saveChapters } = chapter_actions;
 
 const initialState = {
     text: "",
     number: 0,
+    title:"",
+    cover_photo:"",
+    order:0,
+    chapters:[]
 }
 
 const chapterReducer = createReducer(initialState, builder => {
@@ -16,6 +20,19 @@ const chapterReducer = createReducer(initialState, builder => {
         const newState = { ...state, number: action.payload?.number }
         return newState;
     })
+    .addCase(
+        saveChapters.fulfilled,
+        (state, action) => {
+            const newState ={ 
+                ...state,
+                title: action.payload.title,
+                cover_photo: action.payload.cover_photo,
+                order: action.payload.order,
+                chapters: action.payload.chapters
+             }
+             return newState
+        }
+    )
 })
 
 export default chapterReducer;

@@ -120,7 +120,7 @@ const router = createBrowserRouter([
                 }
             },
             {
-                path: '/edit/:id_manga', element: <EditChapter />, loader: async () => {
+                path: '/edit/:manga_id', element: <EditChapter />, loader: async () => {
                     let user = JSON.parse(localStorage.getItem("user"))
 
                     user ? user = { role: user.role } : user = { role: 0 }
