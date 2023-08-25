@@ -23,15 +23,17 @@ export default function Chapter() {
     const navigate = useNavigate();
 
     const { id, page } = useParams();
+    const [show, setShow] = useState(false)
     const [pages, setPages] = useState([]);
     const [next, setNext] = useState("");
     const [count, setCount] = useState(0);
     const [manga_id, setMnaga_id] = useState("");
+    const [reload, setReload] = useState(false)
 
     useEffect(
         () => {
-            dispatch(readComments(id))
-        }, []
+            dispatch(readComments({id, page: 1}))
+        }, [reload]
     )
 
     useEffect(() => {
@@ -65,8 +67,6 @@ export default function Chapter() {
         }
     }
 
-    const [show, setShow] = useState(false)
-
     return (
         <main className='bg-[#EBEBEB] w-full min-h-screen'>
             <div className="flex justify-center items-center lg:bg-gradient-to-r lg:from-[#FF5722] lg:to-[#ff8e3d] bg-gradient-to-r from-[#FF5722] to-[#FF5722] w-full h-[90px] lg:h-[110px]">
@@ -89,16 +89,23 @@ export default function Chapter() {
                     </div>
                 </div>
             </div>
-            
-            {numberComments !== null &&
+
+            {numberComments !== null ? (
                 <div onClick={() => setShow(!show)} className='flex cursor-pointer justify-center items-center pb-5'>
-                <img className='pr-2' src={comment} alt="Comment" />
-                <p className='font-roboto text-[20px] font-normal'>{numberComments}</p>
-            </div>
+                    <img className='pr-2' src={comment} alt="Comment" />
+                    <p className='font-roboto text-[20px] font-normal'>{numberComments}</p>
+                </div>
+            ) : (
+                <div onClick={() => setShow(!show)} className='flex cursor-pointer justify-center items-center pb-5'>
+                    <img className='pr-2' src={comment} alt="Comment" />
+                    <p className='font-roboto text-[20px] font-normal'>New comment</p>
+                </div>
+            )
+
             }
-            
-            {show && <Modal_comments show={show} setShow={setShow} />}
-    
+
+            {show && <Modal_comments show={show} setShow={setShow} reload={reload} setReload={setReload}/>}
+
         </main>
     )
 }

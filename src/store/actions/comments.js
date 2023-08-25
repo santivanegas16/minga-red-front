@@ -5,9 +5,9 @@ import headers from "../../header"
 
 const readComments = createAsyncThunk(
     "readComments",
-    async (id) => {
+    async ({id, page}) => {
         try {
-            let comments = await axios(apiUrl + "comments?chapter_id=" + id, headers())
+            let comments = await axios(apiUrl + "comments?chapter_id=" + id + "&page=" + page, headers())
             return {
                 comments: comments.data.response.comments,
                 next: comments.data.response.next,

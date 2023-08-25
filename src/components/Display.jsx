@@ -5,7 +5,7 @@ import { Link as Anchor, json } from 'react-router-dom';
 export default function Display({ options, show, setShow }) {
     const connected = JSON.parse(localStorage.getItem('user'));
     return (
-        <div className="fixed z-20 top-0 left-0 bg-gradient-to-r from-[#FF5722] to-[#F97316] w-full h-full lg:w-[430px] ">
+        <div className="fixed z-30 top-0 left-0 bg-gradient-to-r from-[#FF5722] to-[#F97316] w-full h-full lg:w-[430px] ">
             <div className='flex mt-5 ml-5'>
                 <img className='w-[46px] h-[46px] rounded-[50px]' src={connected ? connected.photo : Profile} alt='Perfil' />
                 <div className='flex justify-center items-center ml-3 text-white font-poppins'>
