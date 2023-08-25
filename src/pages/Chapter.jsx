@@ -23,15 +23,17 @@ export default function Chapter() {
     const navigate = useNavigate();
 
     const { id, page } = useParams();
+    const [show, setShow] = useState(false)
     const [pages, setPages] = useState([]);
     const [next, setNext] = useState("");
     const [count, setCount] = useState(0);
     const [manga_id, setMnaga_id] = useState("");
+    const [reload, setReload] = useState(false)
 
     useEffect(
         () => {
-            dispatch(readComments(id))
-        }, []
+            dispatch(readComments({id, page: 1}))
+        }, [reload]
     )
 
     useEffect(() => {
@@ -64,8 +66,6 @@ export default function Chapter() {
             navigate(`/chapter/${id}/${count + 1}`);
         }
     }
-
-    const [show, setShow] = useState(false)
 
     return (
         <main className='bg-[#EBEBEB] w-full min-h-screen'>
@@ -104,7 +104,7 @@ export default function Chapter() {
 
             }
 
-            {show && <Modal_comments show={show} setShow={setShow} />}
+            {show && <Modal_comments show={show} setShow={setShow} reload={reload} setReload={setReload}/>}
 
         </main>
     )

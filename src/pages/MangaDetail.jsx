@@ -93,7 +93,7 @@ export default function MangaDetail() {
 									<div className="flex flex-col justify-between">
 										<h1 className='font-poppins font-normal text-xl '>{"Chapter #" + each?.order}</h1>
 										<div className="flex justify-between">
-											<img src={comment} alt="comment" />
+											<h1 className='font-poppins font-normal text-xl '>Pages:</h1>
 											<h1 className='font-poppins font-normal text-xl '>{each?.pages.length}</h1>
 										</div>
 									</div>

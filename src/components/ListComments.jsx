@@ -6,20 +6,31 @@ import Comment from "./Comment";
 
 const { readComments, createComment } = commentsActions
 
-export default function Comments() {
+export default function ListComments({reload, setReload}) {
     const { id } = useParams()
     const dispatch = useDispatch()
     const inputComment = useRef()
-    const [reload, setReload] = useState(false)
-    // const storeComments = useSelector(store => store.comments) 
+    const [page, setPage] = useState(1)
     const comments = useSelector(store => store.comments.comments)
     const next = useSelector(store => store.comments.next)
     const prev = useSelector(store => store.comments.prev)
-    
+
+    const actionNext = () => {
+        if (next) {
+            setPage(next);
+        }
+    }
+
+    const actionPrev = () => {
+        if (prev) {
+            setPage(prev);
+        }
+    }
+
     useEffect(
         () => {
-            dispatch(readComments(id))
-        }, [reload] //se agrega storeComments para que actualice y no salga el error del usuario REVISAR
+            dispatch(readComments({ id, page }))
+        }, [reload, page]
     )
 
     const sendComment = () => {
@@ -31,12 +42,13 @@ export default function Comments() {
         dispatch(createComment(dataComment))
     }
 
+
     return (
         <div className="pt-[50px]">
             {comments.map(each => <Comment each={each} key={each._id} reload={reload} setReload={setReload} />)}
             <div className="flex justify-center items-center">
-                {prev && <button className='bg-gradient-to-r from-[#FF5722] to-[#F97316] text-white rounded-full m-5 w-[100px] h-[40px] transition hover:scale-110' value={prev}>Prev</button>}
-                {next && <button className='bg-gradient-to-r from-[#FF5722] to-[#F97316] text-white rounded-full m-5 w-[100px] h-[40px] transition hover:scale-110' value={next}>Next</button>}
+                {prev && <button onClick={actionPrev} className='bg-gradient-to-r from-[#FF5722] to-[#F97316] text-white rounded-full m-5 w-[100px] h-[40px] transition hover:scale-110' value={prev}>Prev</button>}
+                {next && <button onClick={actionNext} className='bg-gradient-to-r from-[#FF5722] to-[#F97316] text-white rounded-full m-5 w-[100px] h-[40px] transition hover:scale-110' value={next}>Next</button>}
             </div>
             <div className="flex w-full justify-center h-[68px] bg-[#EBEBEB] pb-5">
                 <input ref={inputComment} className="relative flex w-[80%] pl-5 rounded-lg bg-[#EBEBEB] border border-gray-400" type="text" placeholder="Say something here..." ></input>

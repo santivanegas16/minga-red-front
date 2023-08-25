@@ -30,7 +30,7 @@ export default function Comment({ each, reload, setReload }) {
         dispatch(destroyComment({ comment_id: each._id }))
     }
 
-    console.log(reload)
+    // console.log(reload)
 
     return (
         <div className="flex flex-col w-full my-3 px-5 py-2 bg-white">
