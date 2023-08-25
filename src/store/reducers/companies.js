@@ -1,17 +1,17 @@
 import { createReducer, current } from "@reduxjs/toolkit";
-import authorActions from "../actions/authors";
+import companyActions from "../actions/companies";
 
-const { saveProfile, saveAuthors, updateActive } = authorActions
+const { saveProfile, saveCompanies, updateActive } = companyActions
 
 const initialState = {
     profile: {},
-    authors: {
+    companies: {
         active_true: [],
         active_false: []
     }
 }
 
-const authorReducer = createReducer(
+const companyReducer = createReducer(
     initialState,
     (builder) => builder.addCase(
         saveProfile,
@@ -23,12 +23,12 @@ const authorReducer = createReducer(
             return newState
         }
     )
-        .addCase(saveAuthors.fulfilled, (state, action) => {
+        .addCase(saveCompanies.fulfilled, (state, action) => {
             let newState = {
                 ...state,
-                authors: {
-                    active_true: action.payload.authors.active_true,
-                    active_false: action.payload.authors.active_false
+                companies: {
+                    active_true: action.payload.companies.active_true,
+                    active_false: action.payload.companies.active_false
                 }
             }
             return newState
@@ -39,17 +39,17 @@ const authorReducer = createReducer(
             }
             if (action.payload.change === true) {
                 console.log(true)
-                newState.authors.active_true = state.authors.active_true.filter(each => each._id != action.payload.id),
-                    newState.authors.active_false = state.authors.active_false.push(action.payload.data)
+                newState.companies.active_true = state.companies.active_true.filter(each => each._id != action.payload.id),
+                newState.companies.active_false = state.companies.active_false.push(action.payload.data)
 
             } else {
                 console.log(false)
-                newState.authors.active_false = state.authors.active_false.filter(each => each._id != action.payload.id),
-                    newState.authors.active_true = state.authors.active_true.push(action.payload.data)
+                newState.companies.active_false = state.companies.active_false.filter(each => each._id != action.payload.id),
+                newState.companies.active_true = state.companies.active_true.push(action.payload.data)
             }
             console.log(newState)
             return newState
         })
 )
 
-export default authorReducer
+export default companyReducer

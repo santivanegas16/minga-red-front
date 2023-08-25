@@ -3,6 +3,7 @@ import authorReducer from "./reducers/authors";
 import mangaReducer from "./reducers/mangas";
 import chapterReducer from "./reducers/chapters";
 import commentsReducer from "./reducers/comments";
+import companyReducer from "./reducers/companies";
 
 const store = configureStore({
 	reducer: {
@@ -10,7 +11,8 @@ const store = configureStore({
 		authors: authorReducer,
 		mangas: mangaReducer,
 		chapters: chapterReducer,
-		comments : commentsReducer
+		comments : commentsReducer,
+		companies : companyReducer
 	}
 })
 
