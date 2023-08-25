@@ -14,6 +14,7 @@ import MangaDetail from "./MangaDetail";
 import Chapter from "./Chapter";
 import MyMangas from "./MyMangas";
 import New_role from "./New_role";
+import AdminPanel from "../pages/AdminPanel";
 import EditChapter from './EditChapter'
 
 const router = createBrowserRouter([
@@ -136,6 +137,15 @@ const router = createBrowserRouter([
                     user ? user = { role: user.role, online: true } : user = { role: 0, online: false }
 
                     return (user.role != 0) && redirect("/not-allowed")
+                }
+            },
+            {
+                path: '/admin', element: <AdminPanel />, loader: async () => {
+                    let user = JSON.parse(localStorage.getItem('user'));
+
+                    user ? user = { role: user.role, online: true } : user = { role: 0, online: false }
+
+                    return (user.role != 3) && redirect("/")
                 }
             },
         ]
