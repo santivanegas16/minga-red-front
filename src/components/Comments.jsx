@@ -1,85 +1,49 @@
 import { useSelector, useDispatch } from "react-redux"
 import commentsActions from "../store/actions/comments"
-import { useEffect } from "react"
+import { useEffect, useRef } from "react"
 import { useParams } from "react-router-dom";
+import Comment from "./Comment";
 
-const { readComments, destroyComment } = commentsActions
+const { readComments, createComment } = commentsActions
 
 export default function Comments() {
     const { id } = useParams()
     const dispatch = useDispatch()
-
+    const inputComment = useRef()
+    const storeComments = useSelector(store => store.comments) 
+    const comments = useSelector(store => store.comments.comments)
+    const next = useSelector(store => store.comments.next)
+    const prev = useSelector(store => store.comments.prev)
+    
     useEffect(
         () => {
             dispatch(readComments(id))
-        }, []
+        }, [storeComments] //se agrega storeComments para que actualice y no salga el error del usuario REVISAR
     )
 
-    const comments = useSelector(store => store.comments.comments)
-    console.log(comments)
-    const next = useSelector(store => store.comments.next)
-    const prev = useSelector(store => store.comments.prev)
-
-    let user = JSON.parse(localStorage.getItem("user"));
+    const sendComment = () => {
+        let dataComment = {
+            description: inputComment.current?.value.trim(),
+            chapter_id: id
+        }
+        dispatch(createComment(dataComment))
+    }
 
     return (
         <div className="pt-[50px]">
-            {comments.map(each =>
-                <div className="flex flex-col w-full my-3 px-5 py-2 bg-white" key={each._id}>
-                    {user._id === each.user_id._id ? (
-                        <>
-                            <div className="flex justify-between items-center pr-7 pl-2">
-                                <div className="flex">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6">
-                                        <path strokeLinecap="round" strokeLinejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
-                                    </svg>
-                                    <svg onClick={() => dispatch(destroyComment({ comment_id: each._id }))} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6">
-                                        <path strokeLinecap="round" strokeLinejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
-                                    </svg>
-                                </div>
-                                <img className="w-[59px] h-[59px] rounded-full" src={each.user_id.photo} alt="user_photo" />
-                            </div>
-
-                            <div className="flex flex-col">
-                                <p>{each.user_id.email}</p>
-                                <p>{each.description}</p>
-                            </div>
-
-                            <div className="flex items-center mt-3">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6 pr-2">
-                                    <path strokeLinecap="round" strokeLinejoin="round" d="M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 01-2.555-.337A5.972 5.972 0 015.41 20.97a5.969 5.969 0 01-.474-.065 4.48 4.48 0 00.978-2.025c.09-.457-.133-.901-.467-1.226C3.93 16.178 3 14.189 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25z" />
-                                </svg>
-                                <p>20</p>
-                                <div className="pl-5">Reply</div>
-                            </div>
-                        </>
-                    ) : (
-                        <>
-                            <div className="flex items-center">
-                                <img className="w-[59px] h-[59px] rounded-full" src={each.user_id.photo} alt="user_photo" />
-                                <p className="pl-2">{each.user_id.email}</p>
-                            </div>
-                            <p className="pt-2">{each.description}</p>
-
-                            <div className="flex items-center mt-3">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6 pr-2">
-                                    <path strokeLinecap="round" strokeLinejoin="round" d="M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 01-2.555-.337A5.972 5.972 0 015.41 20.97a5.969 5.969 0 01-.474-.065 4.48 4.48 0 00.978-2.025c.09-.457-.133-.901-.467-1.226C3.93 16.178 3 14.189 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25z" />
-                                </svg>
-                                <p>20</p>
-                                <div className="pl-5">Reply</div>
-                            </div>
-                        </>
-                    )
-                    }
-
-                </div>
-            )}
+            {comments.map(each => <Comment each={each} key={each._id}/>)}
             <div className="flex justify-center items-center">
                 {prev && <button className='bg-gradient-to-r from-[#FF5722] to-[#F97316] text-white rounded-full m-5 w-[100px] h-[40px] transition hover:scale-110' value={prev}>Prev</button>}
                 {next && <button className='bg-gradient-to-r from-[#FF5722] to-[#F97316] text-white rounded-full m-5 w-[100px] h-[40px] transition hover:scale-110' value={next}>Next</button>}
             </div>
-
-
-        </div>
+            <div className="flex w-full justify-center h-[68px] bg-[#EBEBEB] pb-5">
+                <input ref={inputComment} className="relative flex w-[80%] pl-5 rounded-lg bg-[#EBEBEB] border border-gray-400" type="text" placeholder="Say something here..." ></input>
+                <span className="absolute right-[15%] pt-3 cursor-pointer" onClick={sendComment}>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5" />
+                    </svg>
+                </span>
+            </div>
+        </div >
     )
 }

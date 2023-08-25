@@ -23,11 +23,16 @@ const save_checks = createAction('save_checks', obj => {
     return { payload: { checks: obj.checks } }
 })
 
+const save_myChecks = createAction('myChecks', obj => {
+    return { payload: { myChecks: obj.myChecks } }
+})
+
 const mangasActions = {
     saveMangasNews,
     save_title,
     saveMangaDetail,
-    save_checks
+    save_checks,
+    save_myChecks
 }
 
 export default mangasActions

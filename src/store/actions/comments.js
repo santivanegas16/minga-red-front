@@ -31,10 +31,8 @@ const destroyComment = createAsyncThunk(
     async (obj) => {
         try {
             let one = await axios.delete(apiUrl + "comments/" + obj.comment_id, headers())
-            //console.log(one.data.response) //aca tengo el id que me devuelve el backend del comentario eliminado
-            //este es el id del comentario que tengo quitar del estato actual comments
             return {
-                id_to_delete: one.data.response //tambien podria enviar obj.comment_id
+                id_to_delete: one.data.response 
             }
         } catch (error) {
             return null
@@ -46,9 +44,20 @@ const updateComment = createAsyncThunk(
     "updateComment",
     async (obj) => {
         try {
-            let one = await axios.put(apiUrl + "comments/" + obj.comment_id, obj, headers())
-            // console.log(one.data.response)
-            return one
+            let one = await axios.put(apiUrl + "comments/" + obj.comment_id, {description : obj.description}, headers())
+            return one.data.response
+        } catch (error) {
+            return null
+        }
+    }
+)
+
+const createComment = createAsyncThunk(
+    "createComment",
+    async (obj) => {
+        try {
+            let one = await axios.post(apiUrl + "comments", obj, headers())
+            return one.data.response
         } catch (error) {
             return null
         }
@@ -58,7 +67,8 @@ const updateComment = createAsyncThunk(
 const commentsActions = {
     readComments,
     destroyComment,
-    updateComment
+    updateComment,
+    createComment
 }
 
 export default commentsActions
