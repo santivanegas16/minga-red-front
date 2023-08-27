@@ -42,6 +42,7 @@ export default function MyMangas() {
     const mangasByCategory = Object.entries(myMangas)
     /* console.log(mangasByCategory) */
     /* console.log(inputsChecked.current.value) */
+   
     return (
         <main className='flex flex-col items-center min-h-screen bg-[#EBEBEB] '>
             <div className='w-full h-[369px] lg:h-[500px] bg-cover bg-center flex flex-col items-center justify-center' style={{ backgroundImage: `url(${mymangasImg})` }}>
@@ -65,7 +66,7 @@ export default function MyMangas() {
                 {mangasByCategory.map(each => {
                     console.log(each)
                     if (each[0] === myChecks[0]) {
-                        return <div className='grid grid-cols-1 lg:grid-cols-2 w-full  md:w-[70%] mt-2 justify-items-center'>
+                        return <div className='grid grid-cols-1 lg:grid-cols-2 w-full h-full  md:w-[70%] mt-2 mb-5 justify-items-center'>
                             {each[1].map((myMangas) => (
 
                                 <Card
@@ -79,6 +80,8 @@ export default function MyMangas() {
 
                             ))}
                         </div>
+                    }else{
+                        //return <div className='w-full h-[244px] text-xl text-bold font-[40px] flex items-center justify-center text-center'>Manga not found</div>
                     }
                 }
                 )}
@@ -86,7 +89,7 @@ export default function MyMangas() {
 
                 {/* {(mangas.length !== 0) ?
                      : (
-                        <div className='w-full h-[244px] text-xl text-bold font-[40px] flex items-center justify-center text-center'>Manga not found</div>
+                        
                     )} */}
 
 
