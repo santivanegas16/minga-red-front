@@ -47,13 +47,27 @@ const readManga = createAsyncThunk(
         }
     }
 )
+const destroy_manga = createAsyncThunk(
+    "destroy_manga",
+    async ({ id, category }) => {
+      try {
+        await axios.delete(`${apiUrl}/mangas/${id}`, header());
+        return { id, category };
+      } catch (error) {
+        console.log(error);
+        return { id: "" };
+      }
+    }
+  );
+  
 const mangasActions = {
     readManga,
     saveMangasNews,
     save_title,
     saveMangaDetail,
     save_checks,
-    save_myChecks
+    save_myChecks,
+    destroy_manga
 }
 
 export default mangasActions
