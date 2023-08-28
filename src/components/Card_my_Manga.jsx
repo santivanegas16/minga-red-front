@@ -2,11 +2,11 @@ import { Link as Anchor } from 'react-router-dom';
 import mas from '../../public/img/mas.svg'
 import edit from '../../public/img/pencil.svg'
 import Modal_comments from './Modal_form_update.jsx';
+import { useState } from 'react';
 
-
-const [show, setShow] = useState(false) 
-const [reload, setReload] = useState(false) 
-export default function Card({ show, setShow, title, type, image, color, hover, manga_id }) {
+export default function Card({ title, type, image, color, hover, manga_id }) {
+    const [show2, setShow] = useState(false)
+    const [reload, setReload] = useState(false)  
     return (
         <div className='relative bg-white w-[325px] h-[158px] rounded-[10px] flex justify-between overflow-hidden items-center mt-8 mb-4 border border-gray-200'>
             <div className='w-[5px] h-[95px]' style={{ backgroundColor: `${color}` }}></div>
@@ -20,8 +20,8 @@ export default function Card({ show, setShow, title, type, image, color, hover, 
                 <p className='font-poppins font-medium text-[16px] leading-[15.23px] mt-6 lg:mt-0'> {title} </p>
                 <p className='font-poppins font-medium text-[13px] leading-[12.37px]' style={{ color: `${color}` }}> {type} </p>
                 <div className=' flex'>
-                    <div onClick={() => setShow(!show)} className="transition hover:scale-110 mt-4 cursor-pointer w-[65px] h-[30px] rounded-[50px] text-white font-poppins font-medium text-[12px] leading-[11.42px] lg:flex justify-center items-center hidden" style={{ backgroundColor: `${hover}`, color: `${color}` }}>Editar</div>
-                    {show && <Modal_comments show={show} setShow={setShow} reload={reload} setReload={setReload}/>}
+                    <div onClick={() => setShow(!show2)} className="transition hover:scale-110 mt-4 cursor-pointer w-[65px] h-[30px] rounded-[50px] text-white font-poppins font-medium text-[12px] leading-[11.42px] lg:flex justify-center items-center hidden" style={{ backgroundColor: `${hover}`, color: `${color}` }}>Editar</div>
+                    {show2 && <Modal_comments show={show2} setShow={setShow}  reload={reload} setReload={setReload}  />}
                     <Anchor to={'/manga/' + manga_id + '/1'} className="transition hover:scale-110 mt-4 cursor-pointer w-[65px] h-[30px] rounded-[50px] text-white font-poppins font-medium text-[12px] leading-[11.42px] lg:flex justify-center items-center hidden" style={{ backgroundColor: `${hover}`, color: `${color}` }}>Eliminar</Anchor>
 
                 </div>
