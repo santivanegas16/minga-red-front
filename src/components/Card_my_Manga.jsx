@@ -1,7 +1,7 @@
 import { Link as Anchor } from 'react-router-dom';
 import mas from '../../public/img/mas.svg'
 import edit from '../../public/img/pencil.svg'
-import Modal_comments from './Modal_form_update.jsx';
+import Modal_form_update from './Modal_form_update.jsx';
 import { useState } from 'react';
 
 export default function Card({ title, type, image, color, hover, manga_id }) {
@@ -22,8 +22,10 @@ export default function Card({ title, type, image, color, hover, manga_id }) {
                 <p className='font-poppins font-medium text-[13px] leading-[12.37px]' style={{ color: `${color}` }}> {type} </p>
                 
                 <div className=' flex'>
-                    <div onClick={() => setShow(!show2)} className="transition hover:scale-110 mt-4 cursor-pointer w-[65px] h-[30px] rounded-[50px] text-white font-poppins font-medium text-[12px] leading-[11.42px] lg:flex justify-center items-center hidden" style={{ backgroundColor: `${hover}`, color: `${color}` }}>Editar</div>
-                    {show2 && <Modal_comments show={show2} setShow={setShow} reload={reload} setReload={setReload} />}
+
+                    <div to='' onClick={() => setShow(!show2)} className="transition hover:scale-110 mt-4 cursor-pointer w-[65px] h-[30px] rounded-[50px] text-white font-poppins font-medium text-[12px] leading-[11.42px] lg:flex justify-center items-center hidden" style={{ backgroundColor: `${hover}`, color: `${color}` }}>Editar</div>
+                    {show2 && <Modal_form_update manga_id={manga_id} show={show2} setShow={setShow} reload={reload} setReload={setReload} />}
+
                     <Anchor to={'/manga/' + manga_id + '/1'} className="transition hover:scale-110 mt-4 cursor-pointer w-[65px] h-[30px] rounded-[50px] text-white font-poppins font-medium text-[12px] leading-[11.42px] lg:flex justify-center items-center hidden" style={{ backgroundColor: `${hover}`, color: `${color}` }}>Eliminar</Anchor>
 
                 </div>
