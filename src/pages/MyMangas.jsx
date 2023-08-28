@@ -21,6 +21,7 @@ export default function MyMangas() {
     const dispatch = useDispatch();
     const [categories, setCategories] = useState([]);
     const [mangas, setMangas] = useState({})
+   
     const actionsChecks = () => {
         let myChecks = Object.values(inputsChecked.current).filter(each => each.checked).map(each => each.value);
         dispatch(save_myChecks({ myChecks }));
@@ -85,13 +86,6 @@ export default function MyMangas() {
                     }
                 }
                 )}
-
-
-                {/* {(mangas.length !== 0) ?
-                     : (
-                        
-                    )} */}
-
 
             </div>
         </main>
