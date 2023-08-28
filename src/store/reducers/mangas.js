@@ -1,7 +1,7 @@
 import { createReducer } from "@reduxjs/toolkit";
 import mangasActions from "../actions/mangas";
 
-const { readManga, saveMangasNews, save_title, saveMangaDetail, save_checks, save_myChecks, destroy_manga } = mangasActions
+const { readManga, saveMangasNews, save_title, saveMangaDetail, save_checks, save_myChecks, update_manga, destroy_manga } = mangasActions
 
 const initialState = {
     new: [],
@@ -13,6 +13,7 @@ const initialState = {
     manga_detail: {},
     myChecks: [],
     myMangas: [],
+    mangas_by_cat: [],
 }
 
 const mangaReducer = createReducer(
@@ -45,7 +46,28 @@ const mangaReducer = createReducer(
         }).addCase(save_myChecks, (state, action) => {
             const newState = { ...state, myChecks: action.payload?.myChecks }
             return newState;
-        }).addCase(destroy_manga.fulfilled, (state, action) => {
+        })/* .addCase(update_manga.fulfilled, (state, action) => {
+            let new_state = {
+                ...state,
+                //mangas_by_cat: state.mangas_by_cat.map((each) => {
+                mangas_by_cat: current(state).mangas_by_cat.map((each) => {
+                    //para poder consologuear el estado "corriente" en lugar del proxy
+                    if (each[0] === action.payload.category) {
+                        let filtered = each[1].map((manga) => {
+                            if (manga._id === action.payload.id) {
+                                return action.payload.modified;
+                            }
+                            return manga;
+                        });
+                        return [each[0], filtered];
+                    }
+                    return each;
+                }),
+            };
+            console.log(new_state);
+            return new_state;
+        }) */
+        .addCase(destroy_manga.fulfilled, (state, action) => {
             let new_state = {
                 ...state,
                 //mangas_by_cat: current(state).mangas_by_cat.map((each) => { //para poder consologuear el estado "corriente" en lugar del proxy
