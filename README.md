@@ -5,9 +5,10 @@ Interface for viewing manga and comics
 ## MEMBERS:
 - Santiago Vanegas Mejia
 - Jannus Alejandro Largo Zafra
-- Estefania Marin Vallejo
+- Robinson Gerardo Duque
 - Juan Mateo Lozano Betancur
-- Diana Carolina Hernandez Abahonza
+- Natalia García López
+- Guillermo Duque
 
 
 To build the modules required by the app
