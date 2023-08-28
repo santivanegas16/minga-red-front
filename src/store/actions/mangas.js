@@ -34,13 +34,10 @@ const readManga = createAsyncThunk(
     'readManga', async (obj) => {
         try {
             let myMangas = await axios(apiUrl + 'mangas/me', header())
-            // console.log(myMangas.data.response);
-
             return {
                 myMangas: myMangas.data.response
             }
         } catch (error) {
-            console.log(error)
             return {
                 mangas: [],
             }
@@ -51,10 +48,9 @@ const update_manga = createAsyncThunk(
     "update_manga",
     async ({ id, data, category }) => {
         try {
-            let modified = await axios.put(`${apiUrl}/mangas/${id}`, data, headers());
+            let modified = await axios.put(`${apiUrl}mangas/${id}`, data, header());
             return { id, modified: modified.data.response, category };
         } catch (error) {
-            console.log(error);
             return { id: "" };
         }
     }
@@ -64,10 +60,9 @@ const destroy_manga = createAsyncThunk(
     "destroy_manga",
     async ({ id, category }) => {
         try {
-            await axios.delete(`${apiUrl}/mangas/${id}`, header());
+            await axios.delete(`${apiUrl}mangas/${id}`, header());
             return { id, category };
         } catch (error) {
-            console.log(error);
             return { id: "" };
         }
     }
@@ -80,7 +75,8 @@ const mangasActions = {
     saveMangaDetail,
     save_checks,
     save_myChecks,
-    destroy_manga
+    destroy_manga,
+    update_manga
 }
 
 export default mangasActions

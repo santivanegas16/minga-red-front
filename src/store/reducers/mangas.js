@@ -46,11 +46,11 @@ const mangaReducer = createReducer(
         }).addCase(save_myChecks, (state, action) => {
             const newState = { ...state, myChecks: action.payload?.myChecks }
             return newState;
-        })/* .addCase(update_manga.fulfilled, (state, action) => {
+        }).addCase(update_manga.fulfilled, (state, action) => {
             let new_state = {
                 ...state,
-                //mangas_by_cat: state.mangas_by_cat.map((each) => {
-                mangas_by_cat: current(state).mangas_by_cat.map((each) => {
+                mangas_by_cat: state.mangas_by_cat.map((each) => {
+                // mangas_by_cat: current(state).mangas_by_cat.map((each) => {
                     //para poder consologuear el estado "corriente" en lugar del proxy
                     if (each[0] === action.payload.category) {
                         let filtered = each[1].map((manga) => {
@@ -66,7 +66,7 @@ const mangaReducer = createReducer(
             };
             console.log(new_state);
             return new_state;
-        }) */
+        })
         .addCase(destroy_manga.fulfilled, (state, action) => {
             let new_state = {
                 ...state,

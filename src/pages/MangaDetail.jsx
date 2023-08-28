@@ -1,6 +1,5 @@
-import reactions from "/img/reactions.svg"
+import Reaction from "../components/Reaction";
 import raiting from "/img/raiting.svg"
-import comment from "/img/icon_comment.svg"
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import apiUrl from '../apiUrl';
@@ -71,8 +70,10 @@ export default function MangaDetail() {
 								<Category key={Manga?.category_id?.name} name={Manga?.category_id?.name} color={Manga?.category_id?.color} hover={Manga?.category_id?.hover} />
 								<h2 className='font-poppins font-medium text-xl text-[#9D9D9D]'>{Manga?.author_id?.name.charAt(0).toUpperCase()}{Manga?.author_id?.name.slice(1).toLowerCase()}</h2>
 							</div>
+							<div className="flex justify-center mt-2 ">
+								<Reaction manga_id={manga_id} />
+							</div>
 							<div className="pt-5">
-								<img src={reactions} />
 								<img className="pt-2" src={raiting} />
 							</div>
 						</div>
