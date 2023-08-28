@@ -16,10 +16,10 @@ export default function MyMangas() {
 
     const myMangas = useSelector(store => store.mangas.myMangas)
     const myChecks = useSelector(store => store.mangas.myChecks)
-     console.log(myMangas) 
-    console.log(myChecks)
+
     const dispatch = useDispatch();
     const [categories, setCategories] = useState([]);
+    const [reload, setReload] = useState(false);
     
    
     const actionsChecks = () => {
@@ -31,18 +31,12 @@ export default function MyMangas() {
         axios.get(apiUrl + "categories").then(res => setCategories(res.data.response)).catch(error => console.log(error));
     }, [])
 
-    /*  useEffect(() => {
-         axios.get(apiUrl + "mangas/me", header()).then(res => console.log(res.data.response)).catch(error => console.log(error));
-     }) */
-
     useEffect(() => {
         dispatch(readManga())
-    }, [myChecks]
+    }, [myChecks, reload])
 
-    )
     const mangasByCategory = Object.entries(myMangas)
-     console.log(mangasByCategory) 
-    /* console.log(inputsChecked.current.value) */
+    console.log(mangasByCategory)
    
     return (
         <main className='flex flex-col items-center min-h-screen bg-[#EBEBEB] '>
@@ -65,9 +59,8 @@ export default function MyMangas() {
                 </form >
 
                 {mangasByCategory.map(each => {
-                    console.log(each)
                     if (each[0] === myChecks[0]) {
-                        return <div className='grid  grid-cols-1 lg:grid-cols-2 w-full h-full  md:w-[70%] mt-2 mb-5 justify-items-center'>
+                        return <div key={0} className='grid grid-cols-1 lg:grid-cols-2 w-full h-full  md:w-[70%] mt-2 mb-5 justify-items-center'>
                             {each[1].map((myMangas) => (
 
                                 <Card
@@ -77,7 +70,9 @@ export default function MyMangas() {
                                     image={myMangas.cover_photo}
                                     type={myMangas.category_id.name}
                                     color={myMangas.category_id.color}
-                                    hover={myMangas.category_id.hover} />
+                                    hover={myMangas.category_id.hover} 
+                                    reload={reload}
+                                    setReload={setReload}/>
 
                             ))}
                         </div>
