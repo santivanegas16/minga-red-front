@@ -22,8 +22,10 @@ export default function Card({ title, type, image, color, hover, manga_id }) {
                 <p className='font-poppins font-medium text-[13px] leading-[12.37px]' style={{ color: `${color}` }}> {type} </p>
                 
                 <div className=' flex'>
+
                     <div to='' onClick={() => setShow(!show2)} className="transition hover:scale-110 mt-4 cursor-pointer w-[65px] h-[30px] rounded-[50px] text-white font-poppins font-medium text-[12px] leading-[11.42px] lg:flex justify-center items-center hidden" style={{ backgroundColor: `${hover}`, color: `${color}` }}>Editar</div>
                     {show2 && <Modal_form_update manga_id={manga_id} show={show2} setShow={setShow} reload={reload} setReload={setReload} />}
+
                     <Anchor to={'/manga/' + manga_id + '/1'} className="transition hover:scale-110 mt-4 cursor-pointer w-[65px] h-[30px] rounded-[50px] text-white font-poppins font-medium text-[12px] leading-[11.42px] lg:flex justify-center items-center hidden" style={{ backgroundColor: `${hover}`, color: `${color}` }}>Eliminar</Anchor>
 
                 </div>
